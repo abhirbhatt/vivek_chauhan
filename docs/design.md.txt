@@ -1,0 +1,382 @@
+# DESIGN.md  
+Cinematic Filmmaker Portfolio – Design & Motion Specification  
+(Reference-Based UI Replication Guide)
+
+--------------------------------------------------
+1. DESIGN INTENT
+--------------------------------------------------
+
+Create an immersive, cinematic, minimal portfolio that feels:
+
+• Dark  
+• Atmospheric  
+• Motion-driven  
+• Video-first  
+• Editorial  
+• Premium  
+
+The website must feel like a film intro, not a normal webpage.
+
+--------------------------------------------------
+2. COLOR SYSTEM
+--------------------------------------------------
+
+--background-primary: #000000  
+--background-secondary: #0A0A0A  
+
+--text-primary: #FFFFFF  
+--text-secondary: #CFCFCF  
+--text-muted: #7A7A7A  
+
+--overlay-dark: rgba(0,0,0,0.45)  
+--border-subtle: rgba(255,255,255,0.12)
+
+--------------------------------------------------
+3. TYPOGRAPHY
+--------------------------------------------------
+
+Primary Font:
+Inter / Helvetica Neue / Neue Haas Grotesk
+
+Weights Used:
+300, 400, 500, 600, 700
+
+Scale:
+
+Hero H1 → 80–110px  
+Section H2 → 48–64px  
+Card Title → 22–28px  
+Body → 16–18px  
+Small Label → 12–13px  
+
+Letter Spacing:
+H1: -0.03em  
+H2: -0.02em  
+Body: 0em  
+
+--------------------------------------------------
+4. SPACING SYSTEM
+--------------------------------------------------
+
+4px  
+8px  
+16px  
+24px  
+32px  
+48px  
+64px  
+96px  
+128px  
+
+Sections always separated by 120–160px
+
+--------------------------------------------------
+5. GLOBAL BASE STYLES
+--------------------------------------------------
+
+body:
+background: black  
+color: white  
+overflow-x: hidden  
+
+img, video:
+width:100%  
+height:100%  
+object-fit:cover  
+
+--------------------------------------------------
+6. LAYOUT CONTAINER
+--------------------------------------------------
+
+.container:
+max-width: 1400px  
+padding: 0 80px  
+
+Mobile padding:
+0 20px  
+
+--------------------------------------------------
+7. LOADER (PAGE INTRO)
+--------------------------------------------------
+
+Black fullscreen overlay  
+Centered text "Loading"
+
+Animation:
+opacity 1 → 0 (0.8s)  
+visibility hidden
+
+--------------------------------------------------
+8. CUSTOM CURSOR (OPTIONAL)
+--------------------------------------------------
+
+Small white dot  
+Large outlined circle  
+
+Hover on links:
+scale 1 → 1.6  
+
+--------------------------------------------------
+9. NAVIGATION BAR
+--------------------------------------------------
+
+Position: fixed top  
+Transparent initially  
+Turns black on scroll  
+
+Logo left  
+Links right  
+
+On load:
+fade + slide down
+
+Link hover:
+Underline grows left → right
+
+--------------------------------------------------
+10. HERO SECTION
+--------------------------------------------------
+
+Height: 100vh  
+
+Background video autoplay muted loop  
+
+Overlay: rgba(0,0,0,0.4)
+
+Center aligned text:
+
+H1  
+Subheading  
+
+ON LOAD ANIMATION:
+H1: y 40px → 0, opacity 0 → 1 (0.8s)  
+Subheading: same with 0.2s delay  
+
+--------------------------------------------------
+11. SCROLL INDICATOR
+--------------------------------------------------
+
+Small text "Scroll" or arrow  
+
+Bounce animation:
+translateY(0 → 10px → 0)
+
+--------------------------------------------------
+12. MISSION STATEMENT
+--------------------------------------------------
+
+Large centered sentence  
+
+On appear:
+opacity 0 → 1  
+y 40px → 0  
+
+--------------------------------------------------
+13. TRUSTED BY LOGO STRIP
+--------------------------------------------------
+
+Infinite horizontal marquee  
+
+Logos grayscale  
+
+Hover:
+grayscale 0  
+opacity 1  
+
+--------------------------------------------------
+14. WORKS GRID
+--------------------------------------------------
+
+Desktop:
+2 columns  
+
+Mobile:
+1 column  
+
+Each card:
+
+aspect-ratio:16/9  
+overflow hidden  
+
+--------------------------------------------------
+15. WORK CARD DEFAULT STATE
+--------------------------------------------------
+
+Poster image visible  
+Dark gradient bottom overlay  
+
+Title bottom left  
+
+--------------------------------------------------
+16. WORK CARD HOVER
+--------------------------------------------------
+
+Video plays  
+Scale container 1 → 1.04  
+Overlay darker  
+Title moves up 10px  
+
+Transition: 0.4s ease
+
+--------------------------------------------------
+17. WORK CARD ON APPEAR
+--------------------------------------------------
+
+opacity 0 → 1  
+y 50px → 0  
+
+Stagger: 0.12s
+
+--------------------------------------------------
+18. SHOWREEL SECTION
+--------------------------------------------------
+
+Large video preview  
+
+Play button center  
+
+Hover:
+Play button scale up  
+
+Click:
+Fullscreen modal video
+
+--------------------------------------------------
+19. ABOUT SECTION
+--------------------------------------------------
+
+Split layout:
+
+Image left  
+Text right  
+
+Image appear:
+x -60px → 0  
+opacity 0 → 1  
+
+Text appear:
+y 40px → 0  
+
+--------------------------------------------------
+20. SERVICES LIST
+--------------------------------------------------
+
+Vertical list  
+
+Each row:
+
+Index number  
+Title  
+
+Hover:
+underline expands  
+text brighter  
+
+--------------------------------------------------
+21. CONTACT CTA
+--------------------------------------------------
+
+Huge heading  
+Big button  
+
+Button hover:
+background white  
+text black  
+
+--------------------------------------------------
+22. FOOTER
+--------------------------------------------------
+
+Black background  
+3 columns desktop  
+Stacked mobile  
+
+Top border subtle line  
+
+--------------------------------------------------
+23. GLOBAL TRANSITIONS
+--------------------------------------------------
+
+All interactive elements:
+
+transition:
+0.4s cubic-bezier(0.25,0.1,0.25,1)
+
+--------------------------------------------------
+24. SCROLL ANIMATION SYSTEM
+--------------------------------------------------
+
+Elements start with:
+
+opacity:0  
+transform: translateY(40px)
+
+When in view:
+
+opacity:1  
+transform:none  
+
+Use IntersectionObserver or GSAP ScrollTrigger
+
+--------------------------------------------------
+25. VIDEO RULES
+--------------------------------------------------
+
+All muted  
+No controls  
+Lazy loaded  
+Poster images required  
+
+--------------------------------------------------
+26. RESPONSIVE BEHAVIOR
+--------------------------------------------------
+
+<768px:
+
+H1 → 44–56px  
+Grid → 1 column  
+Nav becomes hamburger  
+
+--------------------------------------------------
+27. ACCESSIBILITY
+--------------------------------------------------
+
+Contrast AA+  
+Keyboard focus visible  
+prefers-reduced-motion respected  
+
+--------------------------------------------------
+28. PERFORMANCE RULES
+--------------------------------------------------
+
+Preview videos <5MB  
+Hero video <15MB  
+Images WebP  
+Lazy loading  
+
+--------------------------------------------------
+29. FILE ORGANIZATION
+--------------------------------------------------
+
+/css  
+  base.css  
+  layout.css  
+  components.css  
+  animations.css  
+
+/js  
+  scroll.js  
+  video.js  
+  menu.js  
+
+--------------------------------------------------
+30. DESIGN GOAL
+--------------------------------------------------
+
+Every scroll feels like a film cut.  
+Every hover feels alive.  
+Nothing flashy.  
+Nothing noisy.  
+Only motion, typography, and imagery.
+
+END OF FILE
