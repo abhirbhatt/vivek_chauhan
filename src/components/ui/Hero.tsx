@@ -25,10 +25,10 @@ export default function Hero() {
                 { opacity: 1, duration: 1, delay: 0.5 }
             );
 
-            // Parallax effect on video
+            // Parallax effect on video - moves faster for depth
             gsap.to(videoRef.current, {
-                yPercent: 0, // Kinetic but Static (Reference Style)
-                ease: 'none',
+                yPercent: -50, // Moves up faster than scroll
+                ease: 'power1.inout',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top top',
@@ -37,29 +37,31 @@ export default function Hero() {
                 },
             });
 
-            // Parallax on heading and subtitle group
+            // Parallax on Text Group (Heading + Subtitle moving together)
             gsap.to('.hero-text-group', {
-                y: -200,  // Moves up moderately
-                ease: 'none',
+                y: '-95vh',
+                ease: 'power2.inOut',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 1.5,
+                    scrub: true,
                 },
             });
 
-            // Parallax on nav bar
+            // Parallax on Nav Bar (Exact 2:1 Speed Ratio - 2px move per 1px scroll)
             gsap.to(navRef.current, {
-                y: -400,  // Moves up fast
-                ease: 'none',
+                y: '-220vh',
+                ease: 'power4.inOut',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top top',
                     end: 'bottom top',
-                    scrub: 1.5,
+                    scrub: true,
                 },
             });
+
+
         }, containerRef);
 
         return () => ctx.revert();
@@ -68,7 +70,7 @@ export default function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative h-screen w-full overflow-hidden bg-black flex flex-col items-center justify-center"
+            className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden bg-black flex flex-col items-center justify-center z-0"
         >
             {/* Background Video */}
             <div className="fixed inset-0 z-0 select-none pointer-events-none">
@@ -82,7 +84,7 @@ export default function Hero() {
                     className="w-full h-full object-cover object-[50%_65%] opacity-80"
                 >
                     <source
-                        src="/media/website.mp4"
+                        src="/media/web.mov"
                         type="video/mp4"
                     />
                     Your browser does not support the video tag.
@@ -102,16 +104,16 @@ export default function Hero() {
             {/* Content */}
             <div ref={textRef} className="relative z-20 text-center w-full h-full pb-32 pt-[130px] px-4 flex flex-col justify-center items-center">
                 {/* Heading and Subtitle Container */}
-                <div className="hero-text-group hero-text hero-heading mb-12 flex flex-col items-center">
-                    <h1 className="text-[3rem] md:text-[3rem] lg:text-[3rem] font-bold text-white tracking-[10px] md:tracking-[20px] leading-[0.9] mb-8" style={{ fontFamily: '"Zalando Sans Expanded", sans-serif' }}>
-                        FILIPPO<br />FORNER
+                <div className="hero-text-group hero-text hero-heading mb-32 flex flex-col items-center">
+                    <h1 className="hero-title relative z-10 text-[4rem] md:text-[3rem] font-bold text-white tracking-[10px] md:tracking-[20px] leading-[1] mb-2 flex flex-col md:block">
+                        <span style={{ fontFamily: '"Gloock", serif' }}>VIVEK</span><span className="md:ml-1" style={{ fontFamily: '"Great Vibes", cursive', fontWeight: 400, textTransform: 'none', letterSpacing: 'normal' }}>Singh</span>
                     </h1>
 
-                    <div className="hero-subtitle flex flex-col items-center gap-2">
-                        <h2 className="text-lg md:text-2xl font-light text-gray-300 tracking-wide">
+                    <div className="hero-subtitle relative z-20 flex flex-row items-center gap-2 ">
+                        <h2 className="text-lg md:text-sm font-light text-gray-300 tracking-wide">
                             VIDEOGRAPHER
                         </h2>
-                        <span className="text-xs md:text-sm text-gray-500 uppercase tracking-[0.2em]">
+                        <span className="text-xs md:text-sm text-gray-500 uppercase tracking-[0.1em]">
                             Available Worldwide
                         </span>
                     </div>
@@ -120,42 +122,45 @@ export default function Hero() {
                 {/* Navigation Links - Inline with separators + Glassy Background */}
                 <nav
                     ref={navRef}
-                    className="hero-nav relative self-center flex items-center justify-center gap-12 overflow-hidden z-20"
+                    className="hero-nav relative self-center flex items-center justify-center gap-12 overflow-hidden z-30"
                     style={{
                         backdropFilter: 'blur(30px)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.07)',
                         borderRadius: '13px',
-                        width: '57vw',
+                        width: '47vw',
                         height: 'min-content',
-                        padding: '27px 0px',
-                        boxShadow: 'rgba(4, 7, 13, 0.1) 0px 1px 100px inset',
+                        padding: '29px 0px',
+                        boxShadow: 'rgba(51, 55, 63, 0.1) 0px 1px 100px inset',
                     }}
                 >
                     <Link
                         href="#works"
-                        className="text-sm md:text-base text-white/80 hover:text-white transition-colors font-light tracking-wide px-2"
+                        className="text-sm md:text-base hover:text-white transition-colors font-light tracking-wide px-2"
+                        style={{ color: '#aba9aa99' }}
                     >
                         Works
                     </Link>
-                    <div className="w-px h-4 bg-white/20" />
+                    <div className="w-px h-4" style={{ backgroundColor: '#aba9aa99', opacity: 0.2 }} />
                     <Link
                         href="/luts"
-                        className="text-sm md:text-base text-white/80 hover:text-white transition-colors font-light tracking-wide px-2"
+                        className="text-sm md:text-base hover:text-white transition-colors font-light tracking-wide px-2"
+                        style={{ color: '#aba9aa99' }}
                     >
                         LUTs
                     </Link>
-                    <div className="w-px h-4 bg-white/20" />
+                    <div className="w-px h-4" style={{ backgroundColor: '#aba9aa99', opacity: 0.2 }} />
                     <Link
                         href="/contact"
-                        className="text-sm md:text-base text-white/80 hover:text-white transition-colors font-light tracking-wide px-2"
+                        className="text-sm md:text-base hover:text-white transition-colors font-light tracking-wide px-2"
+                        style={{ color: '#aba9aa99' }}
                     >
                         Contacts
                     </Link>
                 </nav>
             </div>
 
-
-
+            {/* Bottom Blurry Fade Gradient */}
+            <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-b from-transparent via-black/60 to-[#000000] z-20 pointer-events-none backdrop-blur-[2px]" />
         </section>
     );
 }

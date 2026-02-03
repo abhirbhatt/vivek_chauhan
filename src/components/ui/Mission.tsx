@@ -53,59 +53,60 @@ export default function Mission() {
                 ease: "none",
             });
 
-            // Animate blur border particles - translate upward on scroll
+            // Animate blur border particles - EXACT 6:1 Speed Ratio
+            // Movement (-600vh) / Scroll Distance (100vh) = 6x Speed
             gsap.to('.blur-border-main', {
-                y: -80,
+                y: '-600vh',
                 ease: 'none',
                 scrollTrigger: {
                     trigger: containerRef.current,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1.5,
+                    start: 'top bottom', // When Mission top enters bottom
+                    end: 'top top',      // Until Mission top reaches top (exactly 100vh scroll)
+                    scrub: 0.1,          // Reduced lag for more precision
                 }
             });
 
             gsap.to('.blur-particle-1', {
-                y: -100,
+                y: '-600vh',
                 ease: 'none',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1.8,
+                    end: 'top top',
+                    scrub: 0.1,
                 }
             });
 
             gsap.to('.blur-particle-2', {
-                y: -120,
+                y: '-600vh',
                 ease: 'none',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1.3,
+                    end: 'top top',
+                    scrub: 0.1,
                 }
             });
 
             gsap.to('.blur-particle-3', {
-                y: -90,
+                y: '-600vh',
                 ease: 'none',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 2,
+                    end: 'top top',
+                    scrub: 0.1,
                 }
             });
 
             gsap.to('.blur-particle-4', {
-                y: -110,
+                y: '-600vh',
                 ease: 'none',
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1.6,
+                    end: 'top top',
+                    scrub: 0.1,
                 }
             });
         }, containerRef);
@@ -116,7 +117,7 @@ export default function Mission() {
     return (
         <section
             ref={containerRef}
-            className="w-full py-32 md:py-48 px-6 md:px-12 flex justify-center items-center relative overflow-hidden z-10"
+            className="w-full py-32 md:py-48 px-6 md:px-12 flex justify-center items-center relative overflow-hidden z-50 mt-[100vh]"
             style={{
                 background: 'radial-gradient(circle at center, #0F121E 0%, #020408 100%)'
             }}
@@ -139,7 +140,7 @@ export default function Mission() {
             />
 
             {/* Blurry Top Border Effect */}
-            <div className="blur-border-container absolute top-0 left-0 right-0 h-32 overflow-hidden pointer-events-none z-20">
+            <div className="blur-border-container absolute top-0 left-0 right-0 h-32 overflow-hidden pointer-events-none z-50">
                 {/* Main blur gradient */}
                 <div
                     className="blur-border-main absolute top-0 left-0 right-0 h-24"
@@ -196,7 +197,7 @@ export default function Mission() {
                 <p
                     ref={textRef}
                     className="text-3xl md:text-5xl lg:text-[4rem] font-bold leading-tight md:leading-[1.1] text-text-primary"
-                    style={{ willChange: 'transform, opacity', fontFamily: '"Zalando Sans Expanded", sans-serif' }}
+                    style={{ willChange: 'transform, opacity', fontFamily: '"Satisfy", cursive' }}
                 >
                     We believe storytelling lives in details, in timing and in silence. That's why we shape emotion through every frame.
                 </p>
