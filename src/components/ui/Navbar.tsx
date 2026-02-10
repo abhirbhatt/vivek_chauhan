@@ -29,9 +29,8 @@ export default function Navbar() {
 
     const navLinks = [
         { name: 'Works', href: '#works' },
-        { name: 'Services', href: '#services' },
-        { name: 'About', href: '#about' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'LUTs', href: '/luts' },
+        { name: 'Contact', href: '/contact' },
     ];
 
     return (
@@ -48,7 +47,7 @@ export default function Navbar() {
 
                     {/* Logo */}
                     <Link href="/" className="nav-item text-white text-xl md:text-2xl font-bold tracking-tight z-50 relative">
-                        FILIPPO FORNER
+                        VIVEK SINGH
                     </Link>
 
                     {/* Desktop Navigation */}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import gsap from 'gsap';
@@ -78,7 +79,7 @@ const projects: Project[] = [
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const cardRef = useRef<HTMLDivElement>(null);
+    const cardRef = useRef<HTMLAnchorElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
     const handleMouseEnter = () => {
@@ -113,11 +114,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                         isPlaying ? "opacity-0" : "opacity-100"
                     )}
                 >
-                    <img
-                        src={project.imageSrc}
-                        alt={project.title}
-                        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
-                    />
+                    <div className="relative w-full h-full">
+                        <Image
+                            src={project.imageSrc}
+                            alt={project.title}
+                            fill
+                            className="object-cover opacity-80 group-hover:opacity-60 transition-opacity"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            quality={80}
+                        />
+                    </div>
                 </div>
 
                 <video
@@ -125,7 +131,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     muted
                     loop
                     playsInline
+                    preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover z-0"
+                    style={{ transform: 'translateZ(0)', willChange: 'transform' }}
                 >
                     <source src={project.videoSrc} type="video/mp4" />
                 </video>
@@ -153,10 +161,10 @@ export default function Works() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const cards = gsap.utils.toArray('.project-card-container');
+            const cards = gsap.utils.toArray<Element>('.project-card-container');
 
             ScrollTrigger.batch(cards, {
-                onEnter: (batch) => {
+                onEnter: (batch: Element[]) => {
                     gsap.to(batch, {
                         opacity: 1,
                         y: 0,
@@ -184,23 +192,8 @@ export default function Works() {
     }, []);
 
     return (
-        <section ref={sectionRef} id="works" className="w-full py-24 md:py-32 px-6 md:px-12 bg-background-primary z-10 relative overflow-hidden">
-            {/* Animated Noise Texture Background */}
-            <div
-                className="absolute noise-texture"
-                style={{
-                    backgroundImage: 'url(https://framerusercontent.com/images/rR6HYXBrMmX4cRpXfXUOvpvpB0.png)',
-                    backgroundSize: '120px 120px',
-                    backgroundRepeat: 'repeat',
-                    position: 'absolute',
-                    inset: '-200%',
-                    width: '400%',
-                    height: '400%',
-                    opacity: 0.08,
-                    willChange: 'transform',
-                    transform: 'translateX(-10%) translateY(10%)',
-                }}
-            />
+        <section ref={sectionRef} id="selected-works" className="w-full py-24 md:py-32 px-6 md:px-12 bg-background-primary z-10 relative overflow-hidden">
+
 
             <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-6 relative z-10">
                 <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">

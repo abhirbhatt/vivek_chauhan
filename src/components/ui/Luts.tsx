@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -55,15 +56,19 @@ export default function Luts() {
         <section
             ref={sectionRef}
             id="services"
-            className="w-full py-24 md:py-32 px-6 md:px-12 bg-background-primary border-t border-white/5"
+            className="w-full py-24 md:py-32 px-6 md:px-12 border-t border-white/5 relative z-50"
+            style={{ backgroundColor: '#000000' }}
         >
             <div className="flex flex-col-reverse md:flex-row md:items-center gap-12 md:gap-20">
 
                 {/* Text Content */}
                 <div ref={contentRef} className="w-full md:w-5/12 space-y-8">
                     <div className="space-y-4">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter">
-                            LUT PACK V1
+                        <h2
+                            className="text-4xl md:text-5xl font-bold text-[#d5dbe6] tracking-tight"
+                            style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
+                        >
+                            COMING SOON
                         </h2>
                         <h3 className="text-xl md:text-2xl text-gray-400 font-light">
                             Free now. Free forever.
@@ -82,20 +87,30 @@ export default function Luts() {
                     </Link>
                 </div>
 
-                {/* Video Preview */}
                 <div ref={videoRef} className="w-full md:w-7/12">
                     <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-zinc-900 border border-white/10 group">
-                        <div className="absolute inset-0 bg-black/20 z-10" />
+                        <div className="absolute inset-0 bg-black/20 z-10 opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
+
+                        {/* Optimized Video Placeholder/Poster */}
+                        <div className="absolute inset-0 z-0 opacity-80 group-hover:opacity-100 transition-opacity duration-700">
+                            <Image
+                                src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop"
+                                alt="LUT Preview"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 60vw"
+                            />
+                        </div>
+
                         <video
                             autoPlay
                             loop
                             muted
                             playsInline
-                            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-                            poster="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop"
+                            className="absolute inset-0 w-full h-full object-cover z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                         >
                             <source
-                                src="https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4"
+                                src="/media/New2.mp4"
                                 type="video/mp4"
                             />
                         </video>

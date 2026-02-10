@@ -1,8 +1,7 @@
 import Hero from "@/components/ui/Hero";
 import Mission from "@/components/ui/Mission";
-import TrustedBy from "@/components/ui/TrustedBy";
-import Works from "@/components/ui/Works";
-import Luts from "@/components/ui/Luts";
+import VideoGallery from "@/components/ui/VideoGallery";
+
 import Contact from "@/components/ui/Contact";
 import Footer from "@/components/ui/Footer";
 
@@ -11,9 +10,9 @@ export default function Home() {
     <main className="relative w-full min-h-screen bg-background-primary text-text-primary">
       <Hero />
       <Mission />
-      <TrustedBy />
-      <Works />
-      <Luts />
+
+      <VideoGallery />
+
       <Contact />
       <Footer />
     </main>

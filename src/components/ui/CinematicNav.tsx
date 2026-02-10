@@ -60,9 +60,10 @@ export default function CinematicNav() {
                     {/* Logo / Brand Name */}
                     <Link
                         href="/"
-                        className="text-white text-xl md:text-2xl font-medium tracking-tight hover:opacity-80 transition-opacity duration-300"
+                        className="text-[#d5dbe6] text-xl md:text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity duration-300"
+                        style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
                     >
-                        FILIPPO FORNER
+                        VIVEK SINGH
                     </Link>
 
                     {/* Desktop Navigation Links */}
