@@ -127,11 +127,9 @@ const Silk = ({ speed = 5, scale = 1, color = '#7B7481', noiseIntensity = 1.5, r
 
   return (
     <div ref={containerRef} className="w-full h-full">
-      {isVisible && (
-        <Canvas dpr={[1, 2]} frameloop="always">
-          <SilkPlane uniforms={uniforms} />
-        </Canvas>
-      )}
+      <Canvas dpr={[1, 2]} frameloop="always">
+        <SilkPlane uniforms={uniforms} />
+      </Canvas>
     </div>
   );
 };

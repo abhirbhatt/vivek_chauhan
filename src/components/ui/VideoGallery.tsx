@@ -132,7 +132,7 @@ export default function VideoGallery() {
         <section
             ref={sectionRef}
             id="works"
-            className="w-full flex flex-col relative z-50 -mt-[31vh]"
+            className="w-full flex flex-col relative z-50 -mt-[90vh]"
             style={{ backgroundColor: '#000000' }}
         >
             {projects.map((project) => (

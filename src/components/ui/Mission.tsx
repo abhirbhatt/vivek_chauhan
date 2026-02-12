@@ -77,7 +77,7 @@ export default function Mission() {
 
             // Har line ki images ko sequence mein reveal karenge
             revealTl.to('.mission-img-span', {
-                width: 'clamp(180px, 25vw, 450px)',
+                width: 'clamp(180px, 26vw, 450px)',
                 stagger: 0.2, // Decreased to make it snappier
                 duration: 1.2, // Decreased duration
                 ease: "power2.out"
@@ -108,7 +108,7 @@ export default function Mission() {
                 y: 250,
                 x: -100,
                 opacity: 0,
-                rotateX: 45,
+                rotateX: 50,
                 transformOrigin: "top left",
                 duration: 1.8,
                 stagger: 0.15,
@@ -226,7 +226,7 @@ export default function Mission() {
                             return (
                                 <span
                                     key={itemIdx}
-                                    className="text-[2.2rem] md:text-[5rem] lg:text-[5.5rem] font-bold tracking-tight text-[#d5dbe6] leading-none"
+                                    className="text-[2.2rem] md:text-[5.3rem] lg:text-[5.5rem] font-bold tracking-tight text-[#d5dbe6] leading-[1.9]"
                                     style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
                                 >
                                     {item}

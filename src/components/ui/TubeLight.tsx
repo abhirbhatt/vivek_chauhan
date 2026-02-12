@@ -14,25 +14,7 @@ export default function TubeLight({
     color = "rgba(255, 255, 255, 0.45)",
     flicker = true
 }: TubeLightProps) {
-    const [isVisible, setIsVisible] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!containerRef.current) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setIsVisible(entry.isIntersecting);
-            },
-            { threshold: 0.01 }
-        );
-
-        observer.observe(containerRef.current);
-        return () => observer.disconnect();
-    }, []);
-
-    if (!isVisible) return <div ref={containerRef} className="h-0 w-full" />;
-
     return (
         <div
             ref={containerRef}

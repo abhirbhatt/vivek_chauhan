@@ -29,7 +29,6 @@ export default function RootLayout({
       <body
         className={`${cursive.variable} ${bricolage.variable} antialiased bg-background-primary text-text-primary`}
       >
-
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
