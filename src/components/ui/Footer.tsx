@@ -1,17 +1,27 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import LightRays from '@/components/LightRays';
+
+const SpotlightCursor = lazy(() => import('./SpotlightCursor'));
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
-    const [isSpotlightActive, setIsSpotlightActive] = useState(false);
     const [currentYear, setCurrentYear] = useState(2026);
     const footerRef = useRef<HTMLDivElement>(null);
+    const [isDesktop, setIsDesktop] = useState(false);
+
+    useEffect(() => {
+        const checkDesktop = () => {
+            setIsDesktop(window.innerWidth >= 768);
+        };
+        checkDesktop();
+        window.addEventListener('resize', checkDesktop);
+        return () => window.removeEventListener('resize', checkDesktop);
+    }, []);
 
     useEffect(() => {
         setCurrentYear(new Date().getFullYear());
@@ -57,30 +67,19 @@ export default function Footer() {
     return (
         <footer
             ref={footerRef}
-            onMouseEnter={() => setIsSpotlightActive(true)}
-            onMouseLeave={() => setIsSpotlightActive(false)}
-            className={`w-full min-h-screen pt-32 pb-12 px-6 md:px-12 relative z-[60] border-t border-white/5 flex flex-col items-center justify-center overflow-hidden ${isSpotlightActive ? 'cursor-none' : ''}`}
+            className="w-full min-h-screen pt-32 pb-12 px-6 md:px-12 relative z-[60] border-t border-white/5 flex flex-col items-center justify-center overflow-hidden"
             style={{ backgroundColor: '#000000' }}
         >
-
-            {/* Light Rays Background */}
-            <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.45]">
-                <LightRays
-                    raysOrigin="top-center"
-                    raysColor="#ffffff"
-                    raysSpeed={1.0}
-                    lightSpread={0.5}
-                    rayLength={3.5}
-                    followMouse={true}
-                    mouseInfluence={0.4}
-                    noiseAmount={0.03}
-                    distortion={0.08}
-                    className="custom-rays"
-                    pulsating={true}
-                    fadeDistance={1.1}
-                    saturation={1.1}
-                />
-            </div>
+            {isDesktop && (
+                <Suspense fallback={null}>
+                    <SpotlightCursor
+                        containerRef={footerRef}
+                        glowColor="255, 255, 255"
+                        spotlightSize={250}
+                        spotlightIntensity={0.2}
+                    />
+                </Suspense>
+            )}
 
             <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
                 <div className="footer-brand-icons mb-12">
