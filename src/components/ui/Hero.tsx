@@ -154,7 +154,7 @@ export default function Hero() {
         >
 
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                <div className="absolute inset-0 bg-black/10 z-10" />
+                <div className="absolute inset-0 bg-black/4 z-10" />
 
                 {/* Animated Noise Texture Background */}
                 <div

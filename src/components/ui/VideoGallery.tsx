@@ -61,30 +61,46 @@ function VideoRow({ project }: { project: Project }) {
         const video = videoRef.current;
         if (!video) return;
 
+        // 🔹 Video Play/Pause Intersection Logic
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         const playPromise = video.play();
                         if (playPromise !== undefined) {
-                            playPromise.catch(error => {
-                                // Silent catch for autoplay blocks
-                                console.log("Autoplay prevented or video not yet loaded");
-                            });
+                            playPromise.catch(() => { });
                         }
                     } else {
                         video.pause();
                     }
                 });
             },
-            { threshold: 0.15 } // Trigger slightly before it's fully in view
+            { threshold: 0.15 }
         );
 
         observer.observe(video);
 
+        // 🔹 Subtle Smooth Parallax for the Video
+        const ctx = gsap.context(() => {
+            gsap.fromTo(video,
+                { yPercent: -8 },
+                {
+                    yPercent: 8,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: video,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1.2,
+                    }
+                }
+            );
+        });
+
         return () => {
             observer.unobserve(video);
             video.pause();
+            ctx.revert();
         };
     }, []);
 
@@ -120,24 +136,13 @@ function VideoRow({ project }: { project: Project }) {
             <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-6 z-10 pointer-events-none">
                 {/* Top Section: Title */}
                 <div className="mt-[3px]">
-                    <h3 className="font-bold text-white tracking-tight uppercase leading-none" style={{ fontSize: '1.75rem', fontFamily: '"Bricolage Grotesque", sans-serif' }}>
+                    <h3 className="font-bold text-white tracking-wider uppercase leading-none" style={{ fontSize: '31px', fontFamily: '"Bricolage Grotesque", sans-serif' }}>
                         {project.title}
                     </h3>
                 </div>
 
-                {/* Bottom Section: View Project */}
+                {/* Bottom Section: Space reserved */}
                 <div className="mb-1">
-                    <Link
-                        href={project.href}
-                        className="flex items-center gap-3 pointer-events-auto group"
-                    >
-                        <span className="text-xs font-mono text-white/40 border border-white/20 rounded-full px-3 py-1">
-                            {project.id}
-                        </span>
-                        <p className="text-xs md:text-sm font-medium text-white/70 tracking-[0.2em] transition-all group-hover:text-white">
-                            VIEW PROJECT —
-                        </p>
-                    </Link>
                 </div>
             </div>
         </div>
