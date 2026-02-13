@@ -7,7 +7,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Silk from '@/components/Silk';
 import { BorderBeam } from '@/components/ui/BorderBeam';
-import TubeLight from '@/components/ui/TubeLight';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,7 +62,6 @@ export default function Contact() {
             className="w-full min-h-screen pt-10 pb-32 md:pb-48 px-6 flex flex-col items-center justify-start text-center overflow-hidden relative z-50"
             style={{ backgroundColor: '#000000' }}
         >
-            <TubeLight />
             <BorderBeam size={400} duration={12} delay={0} colorTo="white" />
 
             {/* Silk Background */}
