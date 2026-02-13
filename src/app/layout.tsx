@@ -17,6 +17,9 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "Vivek Singh - Filmmaker & Videographer",
   description: "Cinematic portfolio of Vivek Singh (AFilmCraft). Filmmaker and Videographer available worldwide.",
+  verification: {
+    google: "jwHduufa-_xoF4-NSIJsu3Ph1g6dqYeTAgGRTjBwMk4",
+  },
 };
 
 export default function RootLayout({
