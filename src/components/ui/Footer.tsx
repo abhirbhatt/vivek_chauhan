@@ -96,7 +96,7 @@ export default function Footer() {
                     <SpotlightCursor
                         containerRef={footerRef}
                         glowColor="255, 255, 255"
-                        spotlightSize={250}
+                        spotlightSize={450}
                         spotlightIntensity={0.2}
                     />
                 </Suspense>

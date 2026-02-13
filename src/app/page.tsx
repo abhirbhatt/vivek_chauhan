@@ -1,9 +1,12 @@
-import Hero from "@/components/ui/Hero";
-import Mission from "@/components/ui/Mission";
-import VideoGallery from "@/components/ui/VideoGallery";
+'use client';
 
-import Contact from "@/components/ui/Contact";
-import Footer from "@/components/ui/Footer";
+import dynamic from 'next/dynamic';
+import Hero from "@/components/ui/Hero";
+
+const Mission = dynamic(() => import("@/components/ui/Mission"), { ssr: false });
+const VideoGallery = dynamic(() => import("@/components/ui/VideoGallery"), { ssr: false });
+const Contact = dynamic(() => import("@/components/ui/Contact"), { ssr: false });
+const Footer = dynamic(() => import("@/components/ui/Footer"), { ssr: false });
 
 export default function Home() {
   return (

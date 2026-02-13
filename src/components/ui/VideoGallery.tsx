@@ -58,27 +58,33 @@ function VideoRow({ project }: { project: Project }) {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        videoRef.current?.play().catch(() => { });
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.catch(error => {
+                                // Silent catch for autoplay blocks
+                                console.log("Autoplay prevented or video not yet loaded");
+                            });
+                        }
                     } else {
-                        videoRef.current?.pause();
+                        video.pause();
                     }
                 });
             },
-            { threshold: 0.1 }
+            { threshold: 0.15 } // Trigger slightly before it's fully in view
         );
 
-        if (videoRef.current) {
-            observer.observe(videoRef.current);
-        }
+        observer.observe(video);
 
         return () => {
-            if (videoRef.current) {
-                observer.unobserve(videoRef.current);
-            }
+            observer.unobserve(video);
+            video.pause();
         };
     }, []);
 
@@ -91,7 +97,8 @@ function VideoRow({ project }: { project: Project }) {
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                autoPlay
+                preload="auto" // Changed to auto for gallery for better readiness
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
                     imageRendering: '-webkit-optimize-contrast',

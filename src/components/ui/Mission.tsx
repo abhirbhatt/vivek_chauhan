@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
-import { BorderBeam } from '@/components/ui/BorderBeam';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,7 +79,7 @@ export default function Mission() {
     const lines = [
         ['I Capture', 'image-1', 'moments'],
         ['And turn ', 'image-2', 'them '],
-        [' Into cinematic', 'image-3',],
+        [' Into', 'image-3', 'cinematic'],
         ['Stories', 'image-4', 'that'],
         ['image-5', 'Breathe.']
     ];
@@ -131,7 +130,6 @@ export default function Mission() {
                                         className="mission-img-span h-[77px] md:h-[154px] w-0 bg-white/10 rounded-lg overflow-hidden relative shadow-2xl"
                                         style={{ willChange: 'width' }}
                                     >
-                                        <BorderBeam size={200} duration={4} colorTo="white" borderWidth={1} />
                                         {isVideo ? (
                                             <video
                                                 src={mediaSrc}
@@ -139,7 +137,7 @@ export default function Mission() {
                                                 loop
                                                 muted
                                                 playsInline
-                                                preload="metadata"
+                                                preload="auto"
                                                 className="h-full w-full object-cover"
                                             />
                                         ) : (

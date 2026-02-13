@@ -97,7 +97,7 @@ export default function Hero() {
             if (heroTitle && heroSubtitle) {
                 gsap.to([heroTitle, heroSubtitle], {
                     y: '-7vh',  // ✅ Doubled for 2x speed (1 scroll pixel = 2 translateY pixels)
-                    ease: 'power1.out',
+                    ease: 'power3.in',
                     scrollTrigger: {
                         trigger: document.documentElement,
                         start: 'top top',
@@ -189,7 +189,7 @@ export default function Hero() {
                 </video>
             </div>
 
-            <div className="hero-text-group relative z-20 text-center w-full h-full pb-32 pt-[130px] px-4 flex flex-col justify-center items-center">
+            <div className="hero-text-group relative z-20 text-center w-full h-full pb-32 pt-[130px] px-4 flex flex-col justify-center items-center" style={{ willChange: 'transform' }}>
                 <h1 className="hero-title relative z-10 text-[5.2rem] md:text-[6rem] font-bold text-white tracking-[14px] md:tracking-[12px] leading-[1.3] md:leading-[0.7] mb-2 flex flex-col md:block">
                     <span style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 700, }}>VIVEK</span><span className="ml-[-11px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none', letterSpacing: '5px', }}>Singh</span>
                 </h1>
