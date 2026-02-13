@@ -209,10 +209,10 @@ export default function Hero() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         alignContent: 'center',
-                        width: '682px',
+                        width: '720px',
                         maxWidth: '95vw',
                         height: '76px',
-                        padding: '23px 0px',
+                        padding: '23px 10px',
                         borderRadius: '13px',
                         backgroundColor: 'rgba(255, 255, 255, 0.15)',
                         backdropFilter: 'blur(30px)',
@@ -223,7 +223,7 @@ export default function Hero() {
                 >
                     <a href="#works" className="px-17 text-[#aba9aa99] hover:text-white transition-colors cursor-pointer no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Works</a>
                     <div className="w-0.5 h-7 bg-white/5" />
-                    <Link href="/luts" className="px-30 text-[#aba9aa99] hover:text-white transition-colors no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>LUTs</Link>
+                    <Link href="/color-grade" className="px-20 text-[#aba9aa99] hover:text-white transition-colors no-underline whitespace-nowrap" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Color Grade</Link>
                     <div className="w-0.5 h-7 bg-white/5" />
                     <Link href="/contact" className="px-17 text-[#aba9aa99] hover:text-white transition-colors no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Contacts</Link>
                 </nav>

@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Luts() {
+export default function ColorGrade() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLDivElement>(null);
@@ -74,7 +74,7 @@ export default function Luts() {
                             Free now. Free forever.
                         </h3>
                         <p className="text-gray-500 leading-relaxed max-w-sm">
-                            Professional color grading preset used in my commercial works.
+                            Professional color grading presets used in my commercial works.
                             Designed for LOG footage to give a clean, cinematic Teal & Orange look.
                         </p>
                     </div>
@@ -95,7 +95,7 @@ export default function Luts() {
                         <div className="absolute inset-0 z-0 opacity-80 group-hover:opacity-100 transition-opacity duration-700">
                             <Image
                                 src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop"
-                                alt="LUT Preview"
+                                alt="Color Grade Preview"
                                 fill
                                 className="object-cover"
                                 sizes="(max-width: 768px) 100vw, 60vw"
