@@ -104,7 +104,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             ref={cardRef}
         >
             <div
-                className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-900 mb-4 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                className="relative aspect-[16/8.64] w-full overflow-hidden rounded-lg bg-zinc-900 mb-4 transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >

@@ -31,43 +31,64 @@ export default function Hero() {
             });
 
             // Set initial states
-            tl.set(videoRef.current, { scale: 1.2, opacity: 0 });
+            tl.set(videoRef.current, { xPercent: -50, scale: 1.1, opacity: 0, filter: 'blur(20px)' });
             tl.set('.hero-title span', { y: 100, opacity: 0, filter: 'blur(20px)' });
-            tl.set('.hero-subtitle', { y: 30, opacity: 0 });
-            tl.set(navRef.current, { y: 60, opacity: 0 });
+            tl.set('.hero-subtitle-left', { x: -50, opacity: 0, filter: 'blur(10px)' });
+            tl.set('.hero-subtitle-right', { x: 50, opacity: 0, filter: 'blur(10px)' });
+            tl.set('.hero-subtitle-dash', { opacity: 0, scale: 0.5 });
+            tl.set(navRef.current, { y: 150, opacity: 0, filter: 'blur(30px)' });
 
-            // 1. Video zoom-out and fade-in
+            // 1. Video zoom-out and fade-in - Reveals FIRST
             tl.to(videoRef.current, {
-                opacity: 0.8,
-                scale: 1.1,
-                duration: 2.5,
-                ease: 'power2.out'
+                opacity: 1,
+                scale: 1,
+                filter: 'blur(0px)',
+                xPercent: -50,
+                duration: 2.8,
+                ease: 'power2.inOut'
             }, 0);
 
-            // 2. Name stagger reveal
+            // 2. Name reveal - Starts once video is nearly clear
             tl.to('.hero-title span', {
                 y: 0,
                 opacity: 1,
                 filter: 'blur(0px)',
-                duration: 1.8,
-                stagger: 0.2,
+                duration: 2.5,
+                stagger: 0.08,
                 ease: 'expo.out'
-            }, 0.5);
+            }, 1.8);
 
-            // 3. Subtitle reveal
-            tl.to('.hero-subtitle', {
-                y: 0,
+            // 3. Subtitle reveal - Sequential after name starts
+            tl.to('.hero-subtitle-left', {
+                x: 0,
                 opacity: 1,
-                duration: 1.2,
-            }, 1.2);
+                filter: 'blur(0px)',
+                duration: 2.4,
+                ease: 'power4.out'
+            }, 2.2)
+                .to('.hero-subtitle-right', {
+                    x: 0,
+                    opacity: 1,
+                    filter: 'blur(0px)',
+                    duration: 2.4,
+                    ease: 'power4.out'
+                }, 2.2)
+                .to('.hero-subtitle-dash', {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 2.0,
+                    ease: 'power2.out'
+                }, 2.5);
 
-            // 4. Nav bar reveal
+            // 4. Nav bar reveal - Dramatic Slide Up last
             tl.to(navRef.current, {
                 y: 0,
                 opacity: 1,
-                duration: 1.5,
-                ease: 'power3.out'
-            }, 1.4);
+                filter: 'blur(0px)',
+                duration: 2.2,
+                ease: 'expo.out'
+            }, 2.8);
+
 
             // 🚀 PARALLAX EFFECTS — 2x FASTER SPEED
             // Heading + Subtitle: SLOW movement (background feel)
@@ -75,7 +96,7 @@ export default function Hero() {
             const heroSubtitle = containerRef.current?.querySelector('.hero-subtitle');
             if (heroTitle && heroSubtitle) {
                 gsap.to([heroTitle, heroSubtitle], {
-                    y: '-80vh',  // ✅ Doubled for 2x speed (1 scroll pixel = 2 translateY pixels)
+                    y: '-7vh',  // ✅ Doubled for 2x speed (1 scroll pixel = 2 translateY pixels)
                     ease: 'power1.out',
                     scrollTrigger: {
                         trigger: document.documentElement,
@@ -90,7 +111,7 @@ export default function Hero() {
             // Navbar: SUPER FAST movement (foreground feel - 2x speed)
             if (navRef.current) {
                 gsap.to(navRef.current, {
-                    y: '-280vh',  // ✅ Doubled for 2x speed
+                    y: '-170vh',  // ✅ Doubled for 2x speed
                     ease: 'power1.out',
                     scrollTrigger: {
                         trigger: document.documentElement,
@@ -128,6 +149,7 @@ export default function Hero() {
     return (
         <section
             ref={containerRef}
+            id="hero"
             className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden  flex flex-col items-center justify-center z-0"
         >
 
@@ -160,8 +182,8 @@ export default function Hero() {
                     muted
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover object-[50%_65%]"
-                    style={{ transform: 'translateZ(0)', opacity: 1 }}
+                    className="min-w-[100vw] h-full object-cover absolute left-1/2"
+                    style={{ opacity: 0, filter: 'blur(20px)' }}
                 >
                     <source src="/media/Web2.mp4" type="video/mp4" />
                 </video>
@@ -173,28 +195,37 @@ export default function Hero() {
                 </h1>
 
                 <div className="hero-subtitle relative z-20 flex flex-col md:flex-row items-center gap-2 mb-24">
-                    <h2 className="text-lg md:text-base font-light text-gray-300 tracking-[0.3em]">AFilmCraft</h2>
-                    <span className="hidden md:inline text-gray-500">—</span>
-                    <span className="text-sm md:text-base text-gray-500 uppercase tracking-[0.1em]">By Sonty</span>
+                    <h2 className="hero-subtitle-left text-lg md:text-base font-light text-gray-300 tracking-[0.3em]">AFilmCraft</h2>
+                    <span className="hero-subtitle-dash hidden md:inline text-gray-500">—</span>
+                    <span className="hero-subtitle-right text-sm md:text-base text-gray-500 uppercase tracking-[0.1em]">By Sonty</span>
                 </div>
 
                 <nav
                     ref={navRef}
-                    className="hero-nav relative self-center flex items-center justify-center gap-5 md:gap-12 overflow-hidden z-30"
+                    className="hero-nav relative self-center flex items-center justify-center overflow-hidden z-30"
                     style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        width: '682px',
+                        maxWidth: '95vw',
+                        height: '76px',
+                        padding: '23px 0px',
+                        borderRadius: '13px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.15)',
                         backdropFilter: 'blur(30px)',
-                        backgroundColor: 'rgba(255, 255, 255, 0.07)',
-                        borderRadius: '15px',
-                        width: 'auto',
-                        padding: '30px 90px',
-                        boxShadow: 'rgba(51, 55, 63, 0.1) 0px 1px 100px inset',
+                        boxShadow: 'rgba(4, 7, 13, 0.1) 0px 1px 100px 0px inset',
+                        gap: '0px',
+                        boxSizing: 'border-box'
                     }}
                 >
-                    <a href="#works" className="text-[#aba9aa99] hover:text-white transition-colors cursor-pointer no-underline">Works</a>
-                    <div className="w-0.5 h-7 rounded-[10px] bg-white/5" />
-                    <Link href="/luts" className="text-[#aba9aa99] hover:text-white transition-colors no-underline">LUTs</Link>
-                    <div className="w-0.5 h-7 rounded-[10px]  bg-white/5" />
-                    <Link href="/contact" className="text-[#aba9aa99] hover:text-white transition-colors no-underline">Contacts</Link>
+                    <a href="#works" className="px-17 text-[#aba9aa99] hover:text-white transition-colors cursor-pointer no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Works</a>
+                    <div className="w-0.5 h-7 bg-white/5" />
+                    <Link href="/luts" className="px-30 text-[#aba9aa99] hover:text-white transition-colors no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>LUTs</Link>
+                    <div className="w-0.5 h-7 bg-white/5" />
+                    <Link href="/contact" className="px-17 text-[#aba9aa99] hover:text-white transition-colors no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Contacts</Link>
                 </nav>
             </div>
         </section>

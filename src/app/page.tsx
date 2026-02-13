@@ -9,12 +9,12 @@ export default function Home() {
   return (
     <main className="relative w-full min-h-screen bg-background-primary text-text-primary">
       <Hero />
-      <Mission />
-
-      <VideoGallery />
-
-      <Contact />
-      <Footer />
+      <div className="mt-[100vh]">
+        <Mission />
+        <VideoGallery />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }

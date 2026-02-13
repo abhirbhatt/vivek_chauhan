@@ -84,26 +84,26 @@ export default function ContactPage() {
             {/* Header Content */}
             <div className="max-w-4xl w-full mb-12 md:mb-20 text-center md:text-left mt-16 md:mt-0">
                 <motion.span
-                    initial={{ opacity: 0, y: 150 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     className="text-xs md:text-sm font-mono text-white/40 tracking-[0.4em] uppercase mb-4 block"
                 >
                     Available Worldwide
                 </motion.span>
                 <motion.h1
-                    initial={{ opacity: 0, y: 200, x: -100 }}
-                    animate={{ opacity: 1, y: 0, x: 0 }}
-                    transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className="text-[3rem] md:text-[6rem] font-bold tracking-tighter leading-[0.9] mb-8 uppercase"
                 >
                     LET'S CREATE <br />
                     SOMETHING <span className="text-white/30" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 400, textTransform: 'none', fontSize: '1.2em', letterSpacing: '10px', marginLeft: '20px' }}>Great.</span>
                 </motion.h1>
                 <motion.p
-                    initial={{ opacity: 0, y: 150 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
                     className="text-white/60 text-lg md:text-xl max-w-xl leading-relaxed"
                 >
                     Whether you have a specific vision or just want to explore possibilities, I'm here to help you tell your story.
@@ -112,9 +112,9 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <motion.div
-                initial={{ opacity: 0, y: 300 }}
+                initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
                 className="max-w-4xl w-full"
             >
                 <form
@@ -226,14 +226,21 @@ export default function ContactPage() {
                         </button>
 
                         <div className="flex gap-8 items-center text-white/40">
-                            <a href="#" className="hover:text-white transition-colors duration-300 transform hover:scale-110">
+                            <a
+                                href="https://www.instagram.com/afilmcraftbysonty?igsh=MXJ0bmxxZXQwaXcwZw=="
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-white transition-colors duration-300 transform hover:scale-110"
+                            >
                                 <Instagram className="w-6 h-6" />
                             </a>
-                            <a href="#" className="hover:text-white transition-colors duration-300 transform hover:scale-110">
-                                <Linkedin className="w-6 h-6" />
-                            </a>
-                            <a href="mailto:contact@afilmcraft.com" className="hover:text-white transition-colors font-mono text-sm tracking-widest uppercase">
-                                contact@afilmcraft.com
+                            <a
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=hello.filmcraftbysonty@gmail.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:text-white transition-colors font-mono text-sm tracking-widest uppercase"
+                            >
+                                hello.filmcraftbysonty@gmail.com
                             </a>
                         </div>
                     </div>

@@ -16,39 +16,31 @@ export default function Contact() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
+            // Set initial state for elements to prevent flash or missing animation
+            gsap.set(wrapperRef.current, {
+                opacity: 0,
+                y: 50
+            });
 
             // 🔹 Entrance Animation
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: containerRef.current,
                     start: 'top 85%',
-                    toggleActions: 'play none none reverse',
+                    end: 'bottom 20%',
+                    toggleActions: 'restart reverse restart reverse',
                 }
             });
 
-            tl.fromTo(
+            tl.to(
                 wrapperRef.current,
-                { y: 200, opacity: 0, filter: 'blur(20px)' },
                 {
                     y: 0,
                     opacity: 1,
-                    filter: 'blur(0px)',
-                    duration: 1.6,
-                    ease: 'expo.out'
+                    duration: 0.8,
+                    ease: 'power3.out'
                 }
             );
-
-            // 🔥 UNIFIED PARALLAX (All content moves together)
-            // gsap.to(wrapperRef.current, {
-            //     y: '-250px',
-            //     ease: 'none',
-            //     scrollTrigger: {
-            //         trigger: containerRef.current,
-            //         start: 'top top',
-            //         end: 'bottom top',
-            //         scrub: true,
-            //     }
-            // });
 
         }, containerRef);
 
@@ -59,7 +51,7 @@ export default function Contact() {
         <section
             ref={containerRef}
             id="contact"
-            className="w-full min-h-screen pt-10 pb-32 md:pb-48 px-6 flex flex-col items-center justify-start text-center overflow-hidden relative z-50"
+            className="w-full min-h-screen pt-10 pb-32 md:pb-48 px-6 flex flex-col items-center justify-start text-center overflow-hidden relative z-40"
             style={{ backgroundColor: '#000000' }}
         >
             <BorderBeam size={400} duration={12} delay={0} colorTo="white" />
