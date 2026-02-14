@@ -101,6 +101,8 @@ export default function Mission() {
                 background: 'radial-gradient(circle at center, #000002ff 0%, #0b0d11 100%)',
             }}
         >
+            {/* Visually Hidden H2 for SEO */}
+            <h2 className="sr-only">Professional Cinematography, Videography, Editing & Color Grading Services by Vivek Singh Chauhan</h2>
             {/* STATIC Noise Texture Background (No Performance-Heavy Animation) */}
             <div
                 className="absolute inset-0 z-0 pointer-events-none"
@@ -143,7 +145,7 @@ export default function Mission() {
                                         ) : (
                                             <Image
                                                 src={mediaSrc}
-                                                alt="Reveal"
+                                                alt="Cinematic filmmaking by Vivek Singh Chauhan"
                                                 fill
                                                 className="object-cover"
                                                 sizes="300px"

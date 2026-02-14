@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 
-export default function ColorGradePage() {
+export default function PowerGradePage() {
     const containerRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
@@ -74,7 +74,7 @@ export default function ColorGradePage() {
                         Coming Soon
                     </h1>
                     <p className="text-white/40 text-sm md:text-base tracking-[0.4em] uppercase font-light">
-                        Color Grade Experience • In Progress
+                        Power Grade Experience • In Progress
                     </p>
                 </div>
 

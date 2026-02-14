@@ -152,6 +152,8 @@ export default function Hero() {
             id="hero"
             className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden  flex flex-col items-center justify-center z-0"
         >
+            {/* Visually Hidden H1 for SEO */}
+            <h1 className="sr-only">Vivek Singh Chauhan - Cinematographer & Filmmaker in Delhi NCR</h1>
 
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
                 <div className="absolute inset-0 bg-black/4 z-10" />

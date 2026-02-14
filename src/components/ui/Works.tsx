@@ -117,7 +117,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     <div className="relative w-full h-full">
                         <Image
                             src={project.imageSrc}
-                            alt={project.title}
+                            alt={`${project.title} - cinematography by Vivek Singh Chauhan Delhi`}
                             fill
                             className="object-cover opacity-80 group-hover:opacity-60 transition-opacity"
                             sizes="(max-width: 768px) 100vw, 50vw"
@@ -194,6 +194,9 @@ export default function Works() {
     return (
         <section ref={sectionRef} id="selected-works" className="w-full py-24 md:py-32 px-6 md:px-12 bg-background-primary z-10 relative overflow-hidden">
 
+
+            {/* Visually Hidden H2 for SEO */}
+            <h2 className="sr-only">Cinematic Wedding Films | Music Videos | Brand Commercials</h2>
 
             <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-6 relative z-10">
                 <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">

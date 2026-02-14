@@ -68,7 +68,7 @@ export default function ColorGrade() {
                             className="text-4xl md:text-5xl font-bold text-[#d5dbe6] tracking-tight"
                             style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
                         >
-                            COMING SOON
+                            POWER GRADE
                         </h2>
                         <h3 className="text-xl md:text-2xl text-gray-400 font-light">
                             Free now. Free forever.
