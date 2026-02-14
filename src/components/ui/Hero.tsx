@@ -223,7 +223,7 @@ export default function Hero() {
                 >
                     <a href="#works" className="px-17 text-[#aba9aa99] hover:text-white transition-colors cursor-pointer no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Works</a>
                     <div className="w-0.5 h-7 bg-white/5" />
-                    <Link href="/color-grade" className="px-20 text-[#aba9aa99] hover:text-white transition-colors no-underline whitespace-nowrap" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Color Grade</Link>
+                    <Link href="/color-grade" className="px-20 text-[#aba9aa99] hover:text-white transition-colors no-underline whitespace-nowrap" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Power Grade</Link>
                     <div className="w-0.5 h-7 bg-white/5" />
                     <Link href="/contact" className="px-17 text-[#aba9aa99] hover:text-white transition-colors no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Contacts</Link>
                 </nav>
