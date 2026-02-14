@@ -9,17 +9,17 @@ import Silk from '@/components/Silk';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Contact() {
+export default function BookAppointment() {
     const containerRef = useRef<HTMLDivElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
             // Target elements
-            const heading = '.contact-heading';
-            const masterpiece = '.contact-masterpiece';
-            const button = '.contact-button-wrapper';
-            const available = '.contact-available-text';
+            const heading = '.book-appointment-heading';
+            const masterpiece = '.book-appointment-masterpiece';
+            const button = '.book-appointment-button-wrapper';
+            const available = '.book-appointment-available-text';
 
             // Set initial state
             gsap.set([heading, masterpiece, button, available], {
@@ -92,20 +92,20 @@ export default function Contact() {
 
             <div
                 ref={wrapperRef}
-                className="contact-content-wrapper relative z-10 w-full flex flex-col items-center mt-4"
+                className="book-appointment-content-wrapper relative z-10 w-full flex flex-col items-center mt-4"
             >
 
                 <div className="relative text-white tracking-tighter max-w-7xl mt-12">
                     <div className="flex flex-col gap-4 md:gap-7">
                         <span
-                            className="contact-heading block text-[1.25rem] md:text-[2rem] lg:text-[5rem] tracking-tight font-bold text-[#d5dbe6]"
+                            className="book-appointment-heading block text-[1.25rem] md:text-[2rem] lg:text-[5rem] tracking-tight font-bold text-[#d5dbe6]"
                             style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
                         >
                             LET'S CREATE YOUR
                         </span>
 
                         <span
-                            className="contact-masterpiece block text-[2.5rem] md:text-[4rem] lg:text-[4.5rem] tracking-widest"
+                            className="book-appointment-masterpiece block text-[2.5rem] md:text-[4rem] lg:text-[4.5rem] tracking-widest"
                             style={{ fontFamily: 'var(--font-cursive)', fontWeight: 400 }}
                         >
                             Next Masterpiece
@@ -113,7 +113,7 @@ export default function Contact() {
                     </div>
                 </div>
 
-                <div className="contact-button-wrapper relative mt-20">
+                <div className="book-appointment-button-wrapper relative mt-20">
                     <Link
                         href="/contact"
                         className="group relative inline-flex items-center justify-center px-10 py-6 text-xl text-white rounded-[25px] overflow-hidden transition-all duration-500 hover:scale-105 border border-white/20 hover:border-white/40"
@@ -139,7 +139,7 @@ export default function Contact() {
                     </Link>
                 </div>
 
-                <div className="contact-available-text mt-12 text-white/30 text-xl md:text-3xl  relative "
+                <div className="book-appointment-available-text mt-12 text-white/30 text-xl md:text-3xl  relative "
                     style={{ fontFamily: 'var(--font-cursive)', fontWeight: 200, letterSpacing: "8px" }}>
                     Available for freelance & collaborations
                 </div>
