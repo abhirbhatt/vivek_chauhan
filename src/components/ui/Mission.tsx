@@ -17,7 +17,7 @@ export default function Mission() {
                 const imgSpan = line.querySelector('.mission-img-span');
                 if (imgSpan) {
                     gsap.to(imgSpan, {
-                        width: 'clamp(180px, 26vw, 450px)',
+                        width: 'clamp(120px, 20vw, 450px)',
                         ease: "none",
                         scrollTrigger: {
                             trigger: line,
@@ -79,9 +79,9 @@ export default function Mission() {
             />
 
 
-            <div className="max-w-none w-full flex flex-col items-center gap-4 md:gap-8 relative z-10 select-none mb-4">
+            <div className="max-w-none w-full flex flex-col items-center gap-2 md:gap-8 relative z-10 select-none mb-4">
                 {lines.map((line, lineIdx) => (
-                    <div key={lineIdx} className="mission-text-line flex flex-wrap items-center justify-center gap-x-4 md:gap-x-12 gap-y-2">
+                    <div key={lineIdx} className="mission-text-line flex flex-wrap items-center justify-center gap-x-3 md:gap-x-12 gap-y-1">
                         {line.map((item, itemIdx) => {
                             if (item.startsWith('image')) {
                                 const imgIdx = parseInt(item.split('-')[1]) - 1;
@@ -91,7 +91,7 @@ export default function Mission() {
                                 return (
                                     <div
                                         key={itemIdx}
-                                        className="mission-img-span h-[77px] md:h-[154px] w-0 bg-white/10 rounded-lg overflow-hidden relative shadow-2xl"
+                                        className="mission-img-span h-[50px] md:h-[154px] w-0 bg-white/10 rounded-lg overflow-hidden relative shadow-2xl mx-1 md:mx-0"
                                         style={{ willChange: 'width' }}
                                     >
                                         {isVideo ? (
@@ -112,7 +112,7 @@ export default function Mission() {
                             return (
                                 <span
                                     key={itemIdx}
-                                    className="text-[2.2rem] md:text-[5.3rem] lg:text-[5.5rem] font-bold tracking-tight text-[#d5dbe6] leading-[1.9]"
+                                    className="text-[3.4rem] sm:text-[2.2rem] md:text-[5.3rem] lg:text-[5.5rem] font-bold tracking-tight text-[#d5dbe6] leading-tight md:leading-[1.9]"
                                     style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
                                 >
                                     {item}

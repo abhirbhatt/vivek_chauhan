@@ -122,10 +122,10 @@ export default function ContactPage() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="text-[3rem] md:text-[6rem] font-bold tracking-tighter leading-[0.9] mb-8 uppercase"
+                    className="text-[2.8rem] md:text-[6rem] font-bold tracking-tighter leading-[1] md:leading-[0.9] mb-8 uppercase"
                 >
                     LET'S CREATE <br />
-                    SOMETHING <span className="text-white/30" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 400, textTransform: 'none', fontSize: '1.2em', letterSpacing: '10px', marginLeft: '20px' }}>Great.</span>
+                    SOMETHING <span className="text-white/30 block md:inline mt-2 md:mt-0 tracking-[4px] md:tracking-[10px] md:ml-[20px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 400, textTransform: 'none', fontSize: '1.2em' }}>Great.</span>
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -227,7 +227,7 @@ export default function ContactPage() {
                     <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-8">
                         <button
                             disabled={status === 'sending'}
-                            className={`relative group h-20 px-12 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 min-w-[280px]
+                            className={`relative group md:h-20 h-20 px-14 md:px-12 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 min-w-[280px]
                                 ${status === 'success' ? 'bg-green-500 text-white' :
                                     status === 'error' ? 'bg-red-500 text-white' :
                                         'bg-white text-black hover:scale-105'}

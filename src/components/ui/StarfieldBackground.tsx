@@ -78,8 +78,19 @@ export default function StarfieldBackground({
         const ro = new ResizeObserver(handleResize)
         ro.observe(container)
 
+        let isVisible = true
+        const io = new IntersectionObserver(([entry]) => {
+            isVisible = entry.isIntersecting
+        }, { threshold: 0.01 })
+        io.observe(container)
+
         // Animation
         const animate = () => {
+            if (!isVisible) {
+                animationId = requestAnimationFrame(animate)
+                return
+            }
+
             tick++
 
             // Fade effect for trails
@@ -153,6 +164,7 @@ export default function StarfieldBackground({
         return () => {
             cancelAnimationFrame(animationId)
             ro.disconnect()
+            io.disconnect()
         }
     }, [count, speed, starColor, twinkle])
 

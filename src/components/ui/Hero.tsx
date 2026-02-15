@@ -13,22 +13,34 @@ export default function Hero() {
     const navRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
+        let observer: IntersectionObserver | null = null;
+        let noiseAnimation: gsap.core.Tween | null = null;
+
+        const startNoiseAnimation = () => {
+            if (!noiseAnimation) {
+                noiseAnimation = gsap.to('.hero-noise-texture', {
+                    duration: 0.05,
+                    repeat: -1,
+                    onRepeat: () => {
+                        gsap.set('.hero-noise-texture', {
+                            x: Math.random() * 20 - 10 + '%',
+                            y: Math.random() * 10 - 5 + '%',
+                        });
+                    },
+                    ease: "none",
+                });
+            } else {
+                noiseAnimation.play();
+            }
+        };
+
+        const stopNoiseAnimation = () => {
+            noiseAnimation?.pause();
+        };
+
         const ctx = gsap.context(() => {
             // Entrance Animation
             const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-
-            // Animate noise texture
-            gsap.to('.hero-noise-texture', {
-                duration: 0.05,
-                repeat: -1,
-                onRepeat: () => {
-                    gsap.set('.hero-noise-texture', {
-                        x: Math.random() * 20 - 10 + '%',
-                        y: Math.random() * 10 - 5 + '%',
-                    });
-                },
-                ease: "none",
-            });
 
             // Set initial states
             tl.set(videoRef.current, { xPercent: -50, scale: 1.1, opacity: 0, filter: 'blur(20px)' });
@@ -91,59 +103,54 @@ export default function Hero() {
 
 
             // 🚀 PARALLAX EFFECTS — 2x FASTER SPEED
-            // Heading + Subtitle: SLOW movement (background feel)
             const heroTitle = containerRef.current?.querySelector('.hero-title');
             const heroSubtitle = containerRef.current?.querySelector('.hero-subtitle');
             if (heroTitle && heroSubtitle) {
                 gsap.to([heroTitle, heroSubtitle], {
-                    y: '-7vh',  // ✅ Doubled for 2x speed (1 scroll pixel = 2 translateY pixels)
+                    y: '-7vh',
                     ease: 'power3.in',
                     scrollTrigger: {
                         trigger: document.documentElement,
                         start: 'top top',
                         end: 'bottom top',
-                        scrub: true,  // ✅ true = instant response (no lag/smoothing)
+                        scrub: true,
                         invalidateOnRefresh: true,
                     },
                 });
             }
 
-            // Navbar: SUPER FAST movement (foreground feel - 2x speed)
             if (navRef.current) {
                 gsap.to(navRef.current, {
-                    y: '-170vh',  // ✅ Doubled for 2x speed
+                    y: '-170vh',
                     ease: 'power1.out',
                     scrollTrigger: {
                         trigger: document.documentElement,
                         start: 'top top',
                         end: 'bottom top',
-                        scrub: true,  // ✅ true = instant (no smoothing delay)
+                        scrub: true,
                         invalidateOnRefresh: true,
                     },
                 });
             }
 
-            // 🚀 VIDEO PERFORMANCE CONTROL — Force Pause when obscured
-            ScrollTrigger.create({
-                trigger: document.documentElement,
-                start: 'top top',
-                end: '100% top', // When the first 100vh is scrolled
-                onUpdate: (self) => {
-                    if (videoRef.current) {
-                        if (self.progress > 0.95) {
-                            videoRef.current.pause();
-                        } else {
-                            if (videoRef.current.paused) {
-                                videoRef.current.play().catch(() => { });
-                            }
-                        }
-                    }
+            // 🚀 PERFORMANCE CONTROL — Pause everything when not visible
+            observer = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) {
+                    videoRef.current?.play().catch(() => { });
+                    startNoiseAnimation();
+                } else {
+                    videoRef.current?.pause();
+                    stopNoiseAnimation();
                 }
-            });
+            }, { threshold: 0.01 });
+
+            if (containerRef.current) observer.observe(containerRef.current);
 
         }, containerRef);
 
         return () => {
+            observer?.disconnect();
+            stopNoiseAnimation();
             ctx.revert();
         };
     }, []);
@@ -152,15 +159,13 @@ export default function Hero() {
         <section
             ref={containerRef}
             id="hero"
-            className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden  flex flex-col items-center justify-center z-0"
+            className="fixed top-0 left-0 right-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center z-0"
         >
-            {/* Visually Hidden H1 for SEO */}
             <h1 className="sr-only">Vivek Singh Chauhan - Cinematographer & Filmmaker in Delhi NCR</h1>
 
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
                 <div className="absolute inset-0 bg-black/30 z-10" />
 
-                {/* Animated Noise Texture Background */}
                 <div
                     className="absolute hero-noise-texture z-20"
                     style={{
@@ -181,7 +186,6 @@ export default function Hero() {
                 />
                 <video
                     ref={videoRef}
-                    autoPlay
                     loop
                     muted
                     playsInline
@@ -193,43 +197,27 @@ export default function Hero() {
                 </video>
             </div>
 
-            <div className="hero-text-group relative z-20 text-center w-full h-full pb-32 pt-[130px] px-4 flex flex-col justify-center items-center" style={{ willChange: 'transform' }}>
-                <h1 className="hero-title relative z-10 text-[5.2rem] md:text-[6rem] font-bold text-white tracking-[14px] md:tracking-[12px] leading-[1.3] md:leading-[0.7] mb-2 flex flex-col md:block">
-                    <span style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 900, }}>VIVEK</span><span className="ml-[-11px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none', letterSpacing: '5px', }}>Singh</span>
+            <div className="hero-text-group relative z-20 text-center w-full h-full pb-32 pt-24 md:pt-[130px] px-4 flex flex-col justify-center items-center" style={{ willChange: 'transform' }}>
+                <h1 className="hero-title relative z-10 text-[3.8rem] md:text-[5.5rem] lg:text-[6rem] font-bold text-white tracking-[6px] md:tracking-[10px] lg:tracking-[12px] leading-[1.1] md:leading-[0.7] mb-2 flex flex-col md:block">
+                    <span style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 900, }}>VIVEK</span><span className="ml-[-6px] md:ml-[-11px] tracking-[2px] md:tracking-[5px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none' }}>Singh</span>
                 </h1>
 
-                <div className="hero-subtitle relative z-20 flex flex-col md:flex-row items-center gap-2 mb-24">
-                    <h2 className="hero-subtitle-left text-lg md:text-base font-light text-gray-300 tracking-[0.3em]">AFilmCraft</h2>
+                <div className="hero-subtitle relative z-20 flex flex-col md:flex-row items-center gap-2 mb-16 md:mb-24">
+                    <h2 className="hero-subtitle-left text-sm md:text-base font-light text-gray-300 tracking-[0.2em] md:tracking-[0.3em]">AFilmCraft</h2>
                     <span className="hero-subtitle-dash hidden md:inline text-gray-500">—</span>
-                    <span className="hero-subtitle-right text-sm md:text-base text-gray-500 uppercase tracking-[0.1em]">By Sonty</span>
+                    <span className="hero-subtitle-right text-xs md:text-base text-gray-500 uppercase tracking-[0.1em]">By Sonty</span>
                 </div>
 
                 <nav
                     ref={navRef}
-                    className="hero-nav relative self-center flex items-center justify-center overflow-hidden z-30"
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        alignContent: 'center',
-                        width: '720px',
-                        maxWidth: '95vw',
-                        height: '76px',
-                        padding: '23px 10px',
-                        borderRadius: '13px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                        backdropFilter: 'blur(30px)',
-                        boxShadow: 'rgba(4, 7, 13, 0.1) 0px 1px 100px 0px inset',
-                        gap: '0px',
-                        boxSizing: 'border-box'
-                    }}
+                    className="hero-nav relative self-center flex items-center justify-center z-30 w-[90vw] md:w-[720px] max-w-full h-auto md:h-[76px] py-4 md:py-[23px] px-2 md:px-[10px] rounded-[10px] md:rounded-[13px] bg-white/10 md:bg-white/15 backdrop-blur-[20px] md:backdrop-blur-[30px] shadow-[inset_0_1px_100px_0_rgba(4,7,13,0.1)] gap-1 md:gap-0"
+                    style={{ boxSizing: 'border-box' }}
                 >
-                    <a href="#works" className="px-17 text-[#aba9aa99] hover:text-white transition-colors cursor-pointer no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Works</a>
-                    <div className="w-0.5 h-7 bg-white/5" />
-                    <Link href="/color-grade" className="px-20 text-[#aba9aa99] hover:text-white transition-colors no-underline whitespace-nowrap" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Power Grade</Link>
-                    <div className="w-0.5 h-7 bg-white/5" />
-                    <Link href="/contact" className="px-17 text-[#aba9aa99] hover:text-white transition-colors no-underline" style={{ fontSize: '16px', fontFamily: 'Bricolage Grotesque' }}>Contacts</Link>
+                    <a href="#works" className="flex-1 md:flex-none px-4 md:px-17 text-[#aba9aa99] hover:text-white transition-colors cursor-pointer no-underline text-sm md:text-base" style={{ fontFamily: 'Bricolage Grotesque' }}>Works</a>
+                    <div className="w-px h-5 md:h-7 bg-white/5" />
+                    <Link href="/color-grade" className="flex-1 md:flex-none px-4 md:px-20 text-[#aba9aa99] hover:text-white transition-colors no-underline whitespace-nowrap text-sm md:text-base" style={{ fontFamily: 'Bricolage Grotesque' }}>Power Grade</Link>
+                    <div className="w-px h-5 md:h-7 bg-white/5" />
+                    <Link href="/contact" className="flex-1 md:flex-none px-4 md:px-17 text-[#aba9aa99] hover:text-white transition-colors no-underline text-sm md:text-base" style={{ fontFamily: 'Bricolage Grotesque' }}>Contacts</Link>
                 </nav>
             </div>
         </section>

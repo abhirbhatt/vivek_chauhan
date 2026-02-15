@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
     const [currentYear, setCurrentYear] = useState(2026);
     const footerRef = useRef<HTMLDivElement>(null);
+    const backgroundVideoRef = useRef<HTMLVideoElement>(null);
     const [isDesktop, setIsDesktop] = useState(false);
 
     useEffect(() => {
@@ -67,6 +68,19 @@ export default function Footer() {
                     ease: 'power2.out'
                 }, '-=0.5');
 
+            // 🔹 Background Video Visibility Logic
+            const bgVideo = backgroundVideoRef.current;
+            if (bgVideo) {
+                const observer = new IntersectionObserver(([entry]) => {
+                    if (entry.isIntersecting) {
+                        bgVideo.play().catch(() => { });
+                    } else {
+                        bgVideo.pause();
+                    }
+                }, { threshold: 0.1 });
+                observer.observe(footerRef.current!);
+            }
+
         }, footerRef);
 
         return () => ctx.revert();
@@ -81,8 +95,8 @@ export default function Footer() {
             {/* Background Video */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <video
+                    ref={backgroundVideoRef}
                     src="/media/Video Project 1.mp4"
-                    autoPlay
                     loop
                     muted
                     playsInline
@@ -138,29 +152,29 @@ export default function Footer() {
                 </div>
 
                 {/* Main Contact CTA */}
-                <div className="footer-contact-cta mb-20">
+                <div className="footer-contact-cta mb-12 md:mb-20">
                     <div className="mb-4">
-                        <a href="#hero" className="text-[10px] uppercase tracking-[0.5em] text-[#d5dbe6]/40 font-bold hover:text-white transition-colors cursor-pointer" style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>Vivek Chauhan</a>
+                        <a href="#hero" className="text-[13px] uppercase tracking-[0.2em] md:tracking-[0.5em] text-[#d5dbe6]/90 md:text-[#d5dbe6]/40 font-bold hover:text-white transition-colors cursor-pointer" style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>Vivek Chauhan</a>
                     </div>
                     <h2
-                        className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-none text-[#d5dbe6]"
+                        className="text-6xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-none text-[#d5dbe6]"
                     >
                         <span style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>GET IN </span>
-                        <span style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none', marginLeft: '-15px' }}>Touch</span>
+                        <span className="ml-[-8px] md:ml-[-15px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none' }}>Touch</span>
                     </h2>
                     <a
                         href="https://mail.google.com/mail/?view=cm&fs=1&to=hello.filmcraftbysonty@gmail.com"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-lg md:text-xl text-gray-400 hover:text-white transition-colors duration-300 border-b border-gray-800 pb-2 lowercase tracking-wide block mx-auto w-fit"
+                        className="text-base md:text-xl text-gray-300 hover:text-white transition-colors duration-300 border-b border-gray-800 pb-2 lowercase tracking-wide block mx-auto w-fit"
                         style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
                     >
                         hello.filmcraftbysonty@gmail.com
                     </a>
                 </div>
 
-                <div className="footer-tagline mb-20">
-                    <p className="text-xl md:text-2xl text-white/40" style={{ fontFamily: 'var(--font-cursive)', textTransform: 'none', letterSpacing: '4px' }}>
+                <div className="footer-tagline mb-12 md:mb-20">
+                    <p className="text-lg md:text-2xl text-white/40 tracking-[2px] md:tracking-[4px]" style={{ fontFamily: 'var(--font-cursive)', textTransform: 'none' }}>
                         A Film Craft by Sonty
                     </p>
                 </div>

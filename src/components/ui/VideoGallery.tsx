@@ -108,7 +108,7 @@ function VideoRow({ project }: { project: Project }) {
     }, []);
 
     return (
-        <div className="group relative w-full aspect-[21/7.48] md:aspect-[21/5.95] overflow-hidden bg-[#000]">
+        <div className="group relative w-full aspect-[22/16] md:aspect-[21/5.95] overflow-hidden bg-black">
             {/* Video Player - Performance Optimized */}
             <video
                 ref={videoRef}
@@ -138,7 +138,7 @@ function VideoRow({ project }: { project: Project }) {
             <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-6 z-10 pointer-events-none">
                 {/* Top Section: Title */}
                 <div className="mt-[3px]">
-                    <h3 className="font-bold text-white tracking-wider uppercase leading-none" style={{ fontSize: '31px', fontFamily: '"Bricolage Grotesque", sans-serif' }}>
+                    <h3 className="text-1xl md:text-[31px] font-bold text-white tracking-wider uppercase leading-none mt-5" style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>
                         {project.title}
                     </h3>
                 </div>
@@ -182,17 +182,17 @@ export default function VideoGallery() {
         <section
             ref={sectionRef}
             id="works"
-            className="w-full flex flex-col relative z-50 overflow-hidden"
+            className="w-full flex  flex-col relative z-50 overflow-hidden"
             style={{ backgroundColor: '#000000', margin: 0, padding: 0 }}
         >
-            <div className="w-full flex items-center justify-center min-h-[30vh] md:min-h-[40vh] py-12">
+            <div className="w-full flex items-center justify-center min-h-[10vh] md:min-h-[40vh] pt-20 pb-0 md:py-12">
                 <ScrollFloat
                     animationDuration={1}
                     ease='back.inOut(2)'
                     scrollStart='top 95%'
                     scrollEnd='bottom 40%'
                     stagger={0.04}
-                    textClassName="text-[2.8rem] md:text-[7.8rem] font-black text-[#d5dbe6] tracking-tight leading-none"
+                    textClassName="text-[2.2rem] md:text-[6rem] lg:text-[7.8rem] font-black text-[#d5dbe6] tracking-tight leading-none"
                     containerClassName="font-sans"
                 >
                     Captured Moments
@@ -201,11 +201,11 @@ export default function VideoGallery() {
 
             {/* Movable Wrapper for independent positioning */}
             <div className="gallery-movable-wrapper w-full">
-                <div ref={containerRef} className="w-full flex flex-col">
+                <div ref={containerRef} className="w-full flex flex-col gap-0">
                     {projects.map((project, index) => (
                         <div
                             key={project.id}
-                            className="relative"
+                            className="relative -mt-[1px] md:mt-0 first:mt-0"
                             style={{ zIndex: projects.length - index }}
                         >
                             <VideoRow project={project} />
