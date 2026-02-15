@@ -12,29 +12,6 @@ export default function Mission() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Shadow reveal animation on scroll
-            gsap.fromTo(containerRef.current,
-                {
-                    // Initial state (Shadow invisible)
-                    boxShadow: '1px 0px 0px 0px rgba(13, 12, 14, 0)',
-                    WebkitBoxShadow: '1px 0px 0px 0px rgba(13, 12, 14, 0)'
-                },
-                {
-                    // Final state (Aapka provided shadow)
-                    boxShadow: '1px -12px 22px 25px #0d0c0eff',
-                    WebkitBoxShadow: '1px -12px 22px 25px #0c0d0fff',
-                    duration: 0.1,
-                    borderTop: '1px solid #0d0c0e8c',
-
-                    scrollTrigger: {
-                        trigger: containerRef.current,
-                        start: "top 99.9%", // Jab section screen mein enter kare
-                        scrub: false,
-                        toggleActions: "play none none reverse",      // Scroll speed ke saath shadow match karegi
-                    }
-                }
-            );
-
             // Individual ScrollTriggers for each line's image - matching your provided code's logic
             gsap.utils.toArray<HTMLElement>('.mission-text-line').forEach((line) => {
                 const imgSpan = line.querySelector('.mission-img-span');
@@ -51,25 +28,6 @@ export default function Mission() {
                     });
                 }
             });
-
-
-            // Text Lines reveal on scroll with dramatic entrance
-            gsap.from('.mission-text-line', {
-                y: 250,
-                x: -100,
-                opacity: 0,
-                rotateX: 50,
-                transformOrigin: "top left",
-                duration: 1.8,
-                stagger: 0.15,
-                ease: "expo.out",
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse",
-                }
-            });
-
         }, containerRef);
 
         return () => ctx.revert();
@@ -96,9 +54,13 @@ export default function Mission() {
         <section
             ref={containerRef}
             id="about"
-            className="w-full pt-32 pb-[calc(40px+15vh)] px-6 md:px-12 flex flex-col justify-center items-center relative overflow-hidden z-50"
+            className="w-full pt-32 pb-32 px-6 md:px-12 flex flex-col justify-center items-center relative overflow-hidden z-50"
             style={{
                 background: 'radial-gradient(circle at center, #000002ff 0%, #0b0d11 100%)',
+                boxShadow: '1px -12px 22px 25px #0d0c0eff, 1px 12px 22px 25px #0d0c0eff',
+                WebkitBoxShadow: '1px -12px 22px 25px #0c0d0fff, 1px 12px 22px 25px #0c0d0fff',
+                borderTop: '1px solid #0d0c0e8c',
+                borderBottom: '1px solid #0d0c0e8c'
             }}
         >
             {/* Visually Hidden H2 for SEO */}
@@ -133,15 +95,7 @@ export default function Mission() {
                                         style={{ willChange: 'width' }}
                                     >
                                         {isVideo ? (
-                                            <video
-                                                src={mediaSrc}
-                                                autoPlay
-                                                loop
-                                                muted
-                                                playsInline
-                                                preload="auto"
-                                                className="h-full w-full object-cover"
-                                            />
+                                            <MissionVideo src={mediaSrc} />
                                         ) : (
                                             <Image
                                                 src={mediaSrc}
@@ -170,5 +124,37 @@ export default function Mission() {
             </div>
 
         </section>
+    );
+}
+
+function MissionVideo({ src }: { src: string }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                video.play().catch(() => { });
+            } else {
+                video.pause();
+            }
+        }, { threshold: 0.1 });
+
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, []);
+
+    return (
+        <video
+            ref={videoRef}
+            src={src}
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover"
+        />
     );
 }

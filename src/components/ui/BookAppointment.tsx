@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { BackgroundBeams } from './background-beams';
+import StarfieldBackground from './StarfieldBackground';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,12 +78,10 @@ export default function BookAppointment() {
             id="contact"
             className="w-full min-h-screen relative flex flex-col items-center justify-center antialiased overflow-hidden bg-neutral-950 py-32 md:py-48"
         >
-            {/* Background Beams with enhanced visibility */}
-            <BackgroundBeams className="opacity-100" />
-
-            {/* Add a subtle radial gradient to make beams fade at the edges and center text pop */}
-            <div className="absolute inset-0 z-0 bg-transparent pointer-events-none"
-                style={{ background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
+            {/* Background Effects Container */}
+            <div className="absolute inset-0 z-0 opacity-40">
+                <StarfieldBackground count={600} speed={0.4} starColor="#ffffff" />
+            </div>
 
             <div
                 ref={wrapperRef}

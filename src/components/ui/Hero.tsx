@@ -123,26 +123,28 @@ export default function Hero() {
                 });
             }
 
-        }, containerRef);
-
-        const videoObserver = new IntersectionObserver(
-            ([entry]) => {
-                if (videoRef.current) {
-                    if (entry.isIntersecting) {
-                        videoRef.current.play().catch(() => { });
-                    } else {
-                        videoRef.current.pause();
+            // 🚀 VIDEO PERFORMANCE CONTROL — Force Pause when obscured
+            ScrollTrigger.create({
+                trigger: document.documentElement,
+                start: 'top top',
+                end: '100% top', // When the first 100vh is scrolled
+                onUpdate: (self) => {
+                    if (videoRef.current) {
+                        if (self.progress > 0.95) {
+                            videoRef.current.pause();
+                        } else {
+                            if (videoRef.current.paused) {
+                                videoRef.current.play().catch(() => { });
+                            }
+                        }
                     }
                 }
-            },
-            { threshold: 0.2 }
-        );
+            });
 
-        if (containerRef.current) videoObserver.observe(containerRef.current);
+        }, containerRef);
 
         return () => {
             ctx.revert();
-            videoObserver.disconnect();
         };
     }, []);
 
@@ -193,7 +195,7 @@ export default function Hero() {
 
             <div className="hero-text-group relative z-20 text-center w-full h-full pb-32 pt-[130px] px-4 flex flex-col justify-center items-center" style={{ willChange: 'transform' }}>
                 <h1 className="hero-title relative z-10 text-[5.2rem] md:text-[6rem] font-bold text-white tracking-[14px] md:tracking-[12px] leading-[1.3] md:leading-[0.7] mb-2 flex flex-col md:block">
-                    <span style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 700, }}>VIVEK</span><span className="ml-[-11px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none', letterSpacing: '5px', }}>Singh</span>
+                    <span style={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 900, }}>VIVEK</span><span className="ml-[-11px]" style={{ fontFamily: 'var(--font-cursive)', fontWeight: 300, textTransform: 'none', letterSpacing: '5px', }}>Singh</span>
                 </h1>
 
                 <div className="hero-subtitle relative z-20 flex flex-col md:flex-row items-center gap-2 mb-24">

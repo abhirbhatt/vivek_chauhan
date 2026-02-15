@@ -1,0 +1,107 @@
+'use client';
+
+import { useEffect, useMemo, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import './ScrollFloat.css';
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface ScrollFloatProps {
+    children: string;
+    scrollContainerRef?: React.RefObject<HTMLElement | null>;
+    containerClassName?: string;
+    textClassName?: string;
+    animationDuration?: number;
+    ease?: string;
+    scrollStart?: string;
+    scrollEnd?: string;
+    stagger?: number;
+}
+
+const ScrollFloat = ({
+    children,
+    scrollContainerRef,
+    containerClassName = '',
+    textClassName = '',
+    animationDuration = 1,
+    ease = 'back.inOut(2)',
+    scrollStart = 'center bottom+=50%',
+    scrollEnd = 'bottom bottom-=40%',
+    stagger = 0.03
+}: ScrollFloatProps) => {
+    const containerRef = useRef<HTMLHeadingElement>(null);
+
+    const splitText = useMemo(() => {
+        const text = typeof children === 'string' ? children : '';
+        const words = text.split(' ');
+
+        return words.map((word, wordIdx) => (
+            <span key={wordIdx} className="word inline-block whitespace-nowrap" style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>
+                {word.split('').map((char, charIdx) => (
+                    <span className="char inline-block" key={charIdx} style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>
+                        {char}
+                    </span>
+                ))}
+                {wordIdx < words.length - 1 && <span className="char inline-block" style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>&nbsp;</span>}
+            </span>
+        ));
+    }, [children]);
+
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el) return;
+
+        const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
+        const charElements = el.querySelectorAll('.char');
+
+        const ctx = gsap.context(() => {
+            if (charElements.length > 0) {
+                gsap.fromTo(
+                    charElements,
+                    {
+                        willChange: 'opacity, transform',
+                        opacity: 0,
+                        yPercent: 120,
+                        scaleY: 2.3,
+                        scaleX: 0.7,
+                        transformOrigin: '50% 0%'
+                    },
+                    {
+                        duration: animationDuration,
+                        ease: ease,
+                        opacity: 1,
+                        yPercent: 0,
+                        scaleY: 1,
+                        scaleX: 1,
+                        stagger: stagger,
+                        scrollTrigger: {
+                            trigger: el,
+                            scroller,
+                            start: scrollStart,
+                            end: scrollEnd,
+                            scrub: true
+                        }
+                    }
+                );
+            }
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger]);
+
+    return (
+        <h2
+            ref={containerRef}
+            className={`scroll-float ${containerClassName}`}
+            style={{ textTransform: 'none', fontFamily: '"Bricolage Grotesque", sans-serif' }}
+        >
+            <span className={`scroll-float-text ${textClassName}`} style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>
+                {splitText}
+            </span>
+        </h2>
+    );
+};
+
+export default ScrollFloat;

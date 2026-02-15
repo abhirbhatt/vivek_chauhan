@@ -5,6 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ScrollFloat from './ScrollFloat';
+
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +78,7 @@ function VideoRow({ project }: { project: Project }) {
                     }
                 });
             },
-            { threshold: 0.15 }
+            { threshold: 0.01 }
         );
 
         observer.observe(video);
@@ -113,7 +116,6 @@ function VideoRow({ project }: { project: Project }) {
                 loop
                 muted
                 playsInline
-                autoPlay
                 preload="auto" // Changed to auto for gallery for better readiness
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
@@ -183,8 +185,22 @@ export default function VideoGallery() {
             className="w-full flex flex-col relative z-50 overflow-hidden"
             style={{ backgroundColor: '#000000', margin: 0, padding: 0 }}
         >
+            <div className="w-full flex items-center justify-center min-h-[30vh] md:min-h-[40vh] py-12">
+                <ScrollFloat
+                    animationDuration={1}
+                    ease='back.inOut(2)'
+                    scrollStart='top 95%'
+                    scrollEnd='bottom 40%'
+                    stagger={0.04}
+                    textClassName="text-[2.8rem] md:text-[7.8rem] font-black text-[#d5dbe6] tracking-tight leading-none"
+                    containerClassName="font-sans"
+                >
+                    Captured Moments
+                </ScrollFloat>
+            </div>
+
             {/* Movable Wrapper for independent positioning */}
-            <div className="gallery-movable-wrapper w-full pt-[-129px]">
+            <div className="gallery-movable-wrapper w-full">
                 <div ref={containerRef} className="w-full flex flex-col">
                     {projects.map((project, index) => (
                         <div

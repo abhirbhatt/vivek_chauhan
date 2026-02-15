@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, CheckCircle2, ChevronDown, Instagram, Mail, Linkedin, ArrowLeft } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
-import TubeLight from '@/components/ui/TubeLight';
+
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -90,7 +90,7 @@ export default function ContactPage() {
 
     return (
         <main className="min-h-screen bg-[#000000] text-white flex flex-col items-center px-6 py-12 md:py-24 relative overflow-hidden">
-            <TubeLight />
+
 
             {/* Ambient background glows */}
             <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-white/5 blur-[120px] rounded-full pointer-events-none" />

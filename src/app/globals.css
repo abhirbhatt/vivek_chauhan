@@ -96,6 +96,7 @@
 
   /* Fonts */
   --font-sans: var(--font-bricolage);
+  --font-signature: var(--font-cursive);
 }
 
 /* Base Styles */

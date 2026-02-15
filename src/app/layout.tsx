@@ -16,8 +16,8 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Vivek Singh Chauhan - Cinematographer, Filmmaker & Videographer | Delhi NCR",
-  description: "Award-winning cinematographer & filmmaker Vivek Singh Chauhan (AFilmCraft) specializing in cinematic wedding films, music videos, brand commercials & creative content production. Professional videographer, editor & color grading expert serving Delhi, Noida, Gurgaon & Pan India.",
+  title: "Vivek Singh Chauhan | Wedding & Commercial Filmmaker in India – AFilmCraft by Sonty",
+  description: "Vivek Singh Chauhan is a professional wedding and commercial filmmaker in India. Cinematic wedding films, brand commercials and music videos by AFilmCraft by Sonty.",
   keywords: [
     // PRIMARY KEYWORDS
     "wedding videographer",
@@ -62,15 +62,15 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://afilcraftbysonty.in"),
+  metadataBase: new URL("https://afilmcraftbysonty.in"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Vivek Singh Chauhan - Cinematographer & Filmmaker | Delhi NCR",
-    description: "Cinematic wedding films, music videos & brand commercials. Professional cinematographer serving Delhi, Noida, Gurgaon.",
-    url: "https://afilcraftbysonty.in",
-    siteName: "AFilmCraft - Vivek Singh Chauhan",
+    title: "Vivek Singh Chauhan | Wedding & Commercial Filmmaker in India – AFilmCraft by Sonty",
+    description: "Vivek Singh Chauhan is a professional wedding and commercial filmmaker in India. Cinematic wedding films, brand commercials and music videos by AFilmCraft by Sonty.",
+    url: "https://afilmcraftbysonty.in",
+    siteName: "AFilmCraft by Sonty",
     locale: "en_IN",
     type: "website",
     images: [

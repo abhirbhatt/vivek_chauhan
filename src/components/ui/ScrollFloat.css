@@ -1,0 +1,25 @@
+.scroll-float {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: visible !important;
+}
+
+.scroll-float-text {
+    display: inline-block;
+    text-align: center;
+    overflow: visible !important;
+}
+
+.char {
+    display: inline-block;
+    will-change: transform, opacity;
+    overflow: visible !important;
+}
+
+.word {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: visible !important;
+}
