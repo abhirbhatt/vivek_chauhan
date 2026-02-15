@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Silk from '@/components/Silk';
+
+import { BackgroundBeams } from './background-beams';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,30 +42,30 @@ export default function BookAppointment() {
                 opacity: 1,
                 y: 0,
                 filter: 'blur(0px)',
-                duration: 1,
+                duration: 1.2,
                 ease: 'power4.out'
             })
                 .to(masterpiece, {
                     opacity: 1,
                     y: 0,
                     filter: 'blur(0px)',
-                    duration: 1.2,
+                    duration: 1.5,
                     ease: 'power3.out'
-                }, '-=0.7')
+                }, '-=0.9')
                 .to(button, {
                     opacity: 1,
                     y: 0,
                     filter: 'blur(0px)',
                     duration: 1,
-                    ease: 'back.out(1.7)'
-                }, '-=0.8')
+                    ease: 'back.out(2)'
+                }, '-=1')
                 .to(available, {
                     opacity: 1,
                     y: 0,
                     filter: 'blur(0px)',
-                    duration: 1,
+                    duration: 1.2,
                     ease: 'power2.out'
-                }, '-=0.6');
+                }, '-=0.8');
 
         }, containerRef);
 
@@ -75,28 +76,22 @@ export default function BookAppointment() {
         <section
             ref={containerRef}
             id="contact"
-            className="w-full min-h-screen pt-10 pb-32 md:pb-48 px-6 flex flex-col items-center justify-start text-center overflow-hidden relative z-40"
-            style={{ backgroundColor: '#000000' }}
+            className="w-full min-h-screen relative flex flex-col items-center justify-center antialiased overflow-hidden bg-neutral-950 py-32 md:py-48"
         >
+            {/* Background Beams with enhanced visibility */}
+            <BackgroundBeams className="opacity-100" />
 
-            {/* Silk Background */}
-            <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
-                <Silk
-                    speed={1.5}
-                    scale={0.6}
-                    color="#634f7a"
-                    noiseIntensity={0.6}
-                    rotation={0}
-                />
-            </div>
+            {/* Add a subtle radial gradient to make beams fade at the edges and center text pop */}
+            <div className="absolute inset-0 z-0 bg-transparent pointer-events-none"
+                style={{ background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)' }} />
 
             <div
                 ref={wrapperRef}
                 className="book-appointment-content-wrapper relative z-10 w-full flex flex-col items-center mt-4"
             >
 
-                <div className="relative text-white tracking-tighter max-w-7xl mt-12">
-                    <div className="flex flex-col gap-4 md:gap-7">
+                <div className="relative text-white tracking-tighter max-w-7xl mt-12 w-full">
+                    <div className="flex flex-col gap-4 md:gap-7 items-center text-center w-full">
                         <span
                             className="book-appointment-heading block text-[1.25rem] md:text-[2rem] lg:text-[5rem] tracking-tight font-bold text-[#d5dbe6]"
                             style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}

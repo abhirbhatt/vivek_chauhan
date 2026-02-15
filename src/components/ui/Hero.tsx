@@ -156,7 +156,7 @@ export default function Hero() {
             <h1 className="sr-only">Vivek Singh Chauhan - Cinematographer & Filmmaker in Delhi NCR</h1>
 
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                <div className="absolute inset-0 bg-black/4 z-10" />
+                <div className="absolute inset-0 bg-black/30 z-10" />
 
                 {/* Animated Noise Texture Background */}
                 <div
