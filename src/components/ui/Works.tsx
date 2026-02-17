@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SmartVideo from './SmartVideo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,17 +127,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     </div>
                 </div>
 
-                <video
+                <SmartVideo
                     ref={videoRef}
+                    src={project.videoSrc}
                     muted
                     loop
                     playsInline
                     preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover z-0"
                     style={{ transform: 'translateZ(0)', willChange: 'transform' }}
-                >
-                    <source src={project.videoSrc} type="video/mp4" />
-                </video>
+                />
 
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 z-20 transition-colors" />
             </div>

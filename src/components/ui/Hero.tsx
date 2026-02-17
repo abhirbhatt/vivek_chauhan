@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SmartVideo from './SmartVideo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -184,17 +185,16 @@ export default function Hero() {
                         filter: 'contrast(150%) brightness(80%)',
                     }}
                 />
-                <video
+                <SmartVideo
                     ref={videoRef}
+                    src="/media/Web2.mp4"
                     loop
                     muted
                     playsInline
                     preload="auto"
                     className="min-w-[100vw] h-full object-cover absolute left-1/2"
                     style={{ opacity: 0, filter: 'blur(20px)' }}
-                >
-                    <source src="/media/Web2.mp4" type="video/mp4" />
-                </video>
+                />
             </div>
 
             <div className="hero-text-group relative z-20 text-center w-full h-full pb-32 pt-24 md:pt-[130px] px-4 flex flex-col justify-center items-center" style={{ willChange: 'transform' }}>

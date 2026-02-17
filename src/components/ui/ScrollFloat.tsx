@@ -97,7 +97,7 @@ const ScrollFloat = ({
             className={`scroll-float ${containerClassName}`}
             style={{ textTransform: 'none', fontFamily: '"Bricolage Grotesque", sans-serif' }}
         >
-            <span className={`scroll-float-text ${textClassName}`} style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>
+            <span className={`scroll-float-text ${textClassName} pb-15 md:pb-0`} style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}>
                 {splitText}
             </span>
         </h2>

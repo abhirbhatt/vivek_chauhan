@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SmartVideo from './SmartVideo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,18 +103,14 @@ export default function ColorGrade() {
                             />
                         </div>
 
-                        <video
+                        <SmartVideo
+                            src="/media/New2.mp4"
                             autoPlay
                             loop
                             muted
                             playsInline
                             className="absolute inset-0 w-full h-full object-cover z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                        >
-                            <source
-                                src="/media/New2.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
+                        />
 
                         {/* Badge */}
                         <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-md px-3 py-1 rounded text-xs font-bold text-white border border-white/20">

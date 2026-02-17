@@ -6,6 +6,7 @@ import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ScrollFloat from './ScrollFloat';
+import SmartVideo from './SmartVideo';
 
 
 
@@ -15,6 +16,7 @@ interface Project {
     id: string;
     title: string;
     videoSrc: string;
+    mobileSrc?: string;
     imageSrc: string;
     href: string;
 }
@@ -24,6 +26,7 @@ const projects: Project[] = [
         id: '01',
         title: 'Dramatic Essence',
         videoSrc: '/assets/DRAMATIC(1)high.mp4',
+        mobileSrc: '/media/Dramaticsmall_box.mp4',
         imageSrc: 'https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800&h=600&fit=crop',
         href: '/works/dramatic-essence'
     },
@@ -52,6 +55,7 @@ const projects: Project[] = [
         id: '05',
         title: 'Atmospheric Moments',
         videoSrc: '/media/1.mp4',
+        mobileSrc: '/media/1small_box.mp4',
         imageSrc: 'https://images.unsplash.com/photo-1492691523567-6170d0275df1?w=800&h=600&fit=crop',
         href: '/works/atmospheric-moments'
     }
@@ -110,13 +114,14 @@ function VideoRow({ project }: { project: Project }) {
     return (
         <div className="group relative w-full aspect-[22/16] md:aspect-[21/5.95] overflow-hidden bg-black">
             {/* Video Player - Performance Optimized */}
-            <video
+            <SmartVideo
                 ref={videoRef}
                 src={project.videoSrc}
+                mobileSrc={project.mobileSrc}
                 loop
                 muted
                 playsInline
-                preload="auto" // Changed to auto for gallery for better readiness
+                preload="auto"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
                     imageRendering: '-webkit-optimize-contrast',
@@ -126,7 +131,6 @@ function VideoRow({ project }: { project: Project }) {
                     width: '100%',
                     height: '100%',
                     opacity: 1,
-                    // Ensure the first video is definitely wide enough
                     scale: project.id === '01' ? 1.05 : 1
                 }}
             />
@@ -183,14 +187,14 @@ export default function VideoGallery() {
             ref={sectionRef}
             id="works"
             className="w-full flex  flex-col relative z-50 overflow-hidden"
-            style={{ backgroundColor: '#000000', margin: 0, padding: 0 }}
+            style={{ backgroundColor: '#131212ff', margin: 0, padding: 0 }}
         >
-            <div className="w-full flex items-center justify-center min-h-[10vh] md:min-h-[40vh] pt-20 pb-0 md:py-12">
+            <div className="w-full flex items-center justify-center min-h-[6vh] md:min-h-[40vh] pt-14 pb-0 md:py-12">
                 <ScrollFloat
                     animationDuration={1}
                     ease='back.inOut(2)'
-                    scrollStart='top 95%'
-                    scrollEnd='bottom 40%'
+                    scrollStart='bottom 95%'
+                    scrollEnd='center 40%'
                     stagger={0.04}
                     textClassName="text-[2.2rem] md:text-[6rem] lg:text-[7.8rem] font-black text-[#d5dbe6] tracking-tight leading-none"
                     containerClassName="font-sans"

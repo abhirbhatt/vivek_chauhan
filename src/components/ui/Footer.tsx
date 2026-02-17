@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, Suspense, lazy } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SmartVideo from './SmartVideo';
 
 const SpotlightCursor = lazy(() => import('./SpotlightCursor'));
 
@@ -94,7 +95,7 @@ export default function Footer() {
         >
             {/* Background Video */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <video
+                <SmartVideo
                     ref={backgroundVideoRef}
                     src="/media/Video Project 1.mp4"
                     loop
